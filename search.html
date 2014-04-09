@@ -5,10 +5,31 @@
     <meta charset="utf-8">
     <title>Ride Search</title>
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- link calendar resources -->
+    <link rel="stylesheet" type="text/css" href="calendar/tcal.css" />
+    <script type="text/javascript" src="calendar/tcal.js"></script>
+    
   </head>
 
   <body>
-
+  
+    <div id="wrapper">
+      <form action="TODO" method="POST">
+        <h1>Ride Search</h1>
+        <p> 
+          <input type="text" value="From:" name="from">
+        </p>
+        <p>
+          <input type="text" value="To:" name="to">
+        </p>
+        <p>
+          <input type="text" name="date" class="tcal" value="" size="21" /><br>
+          <small>Select a date range</small>
+        </p>
+      </form>
+    </div>
+    
   </body>
 
 </html>
