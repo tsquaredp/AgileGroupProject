@@ -2,31 +2,45 @@ body {
 
 	background-color:#E7EFEF;
     font-family: Arial, Times New Roman;
-	
 }
 
 .bookingInfo {
-
-
-
+    float:right;
+    border: solid;
+    width: 19%;
+    Height: 800px;
 }
 
 .carInfo {
-
-
-
+    float:left;
+    border: solid;
+    height: 285px;
+    width: 38%;
+    margin-top: 10px;
+    margin-right: 5px;
 }
 
 .driverInfo {
-
-
-
+    float:right;
+    border: solid;
+    height: 285px;
+    width: 38%;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .map {
+    float:left;
+    border: solid;
+    width: 79.5%;
+    height: 500px;
+ 
+}
 
-	
-
+.gasInfo{
+    margin-left:30px;
+    border: solid;
+    width: 70%;
 }
 
 #wrapper {
