@@ -9,29 +9,81 @@
     <!-- link calendar resources -->
     <link rel="stylesheet" type="text/css" href="calendar/tcal.css" />
     <script type="text/javascript" src="calendar/tcal.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+
     
   </head>
 
   <body>
   
     <div id="wrapper">
-      <form action="rideSearchResults.html" method="post">
+
         <h1>Ride Search</h1>
-        <p> 
-          <input type="text" value="From:" name="from">
-        </p>
-        <p>
-          <input type="text" value="To:" name="to">
-        </p>
-        <p>
-          <input type="text" name="date" class="tcal" value="" size="21" /><br>
-          <small>Select a date range</small>
-        </p>
-        <p>
-          <input type="submit" value="Search">
-        </p>
-      </form>
+        <section>
+            <div class="formField">
+                <label for="origin">Origin: </label>
+                <input type="text" id="origin">
+            </div>
+            <div class="formField">
+                <label for="destination">Destination: </label>
+                <input type="text" id="destination">
+            </div>
+            <div class="formField">
+                <label for="date">Date: </label>
+                <input type="text" name="date" class="tcal" value="" size="21" id="date"/><br>
+                <small>Select a date range</small>
+            </div>
+            <div class="formField">
+                <label for="searchRides">Search Rides: </label>
+                <input type="button" id="searchRides" value="Click">
+            </div>
+        </section>
+
     </div>
+    
+    <script>
+    $(document).ready(function(){
+ 
+        $("#searchRides").click(function(){
+            var origin = $("#origin").val();
+            var destination  = $("#destination").val();
+            var date = $("#date").val();
+        
+            var searchRides = $(function(){
+                Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+                
+                var Ride = Parse.Object.extend("Ride");//create Ride class, subclass of Parse.Object
+                var query = new Parse.Query(Ride);//create instance of Ride Class, called query
+                
+                if(origin != ''){query.equalTo("origin",origin);}
+                if(destination != ''){query.equalTo("destination",destination);}
+                if(date != ''){query.equalTo("date", date);}
+
+                query.find({
+                  success: function(results) {
+                    var rideArray = new Array();
+                    // The object was retrieved successfully.
+
+                    for (var i = 0; i < results.length; i++) { 
+                      var object = results[i];
+                      alert(object.id + ' - ' + object.get('destination'));
+                      rideArray.push(object.id);
+                    }
+                  window.location = "rideSearchResults.html?"+rideArray;
+                  },
+                  error: function(object, error) {
+                    // The object was not retrieved successfully.
+                    // error is a Parse.Error with an error code and description.
+                    alert("error");
+                  }
+                });
+                
+                
+            });
+        });
+    });
+    </script>
     
   </body>
 

@@ -4,34 +4,51 @@
         Rides
     </title>
     <link href="styles.css" rel="stylesheet">
-</head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+    </head>
 <body>
-	<section class="ride">
-		<div class="route">
-			<a href="ride.html">
-				<span class="origin">Eau Claire</span> - <span class="destination">Minneapolis</span>
-				<p class="time">Departs 5:00PM</p>
-			</a>
-		</div>
-		<div class="seatCost">
-			Per Seat:
-			<p>$15</p>
-		</div>
-	</section>
-	<section class="ride">
-		<div class="route">
-			<a href="ride.html">
-				<span class="origin">Eau Claire</span> - <span class="destination">Minneapolis</span>
-				<p class="time">Departs 5:00PM</p>
-			</a>
-		</div>
-		<div class="seatCost">
-			Per Seat:
-			<p>$15</p>
-		</div>
-	</section>
+<h3 class="date"></h3>
+<section id="content">
+</section>
+
     
-<script src="ridesJson.js"></script>
+    <script>
+        Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+        var query = window.location.search;
+        // Skip the leading ?, which should always be there, 
+        // but be careful anyway
+          
+        if (query.substring(0, 1) == '?') {
+            query = query.substring(1);
+        }
+     
+        var data = query.split(','); 
+            for (i = 0; (i < data.length); i++) {
+                data[i] = unescape(data[i]);
+                var Ride = Parse.Object.extend("Ride");
+                var query = new Parse.Query(Ride);
+                var info = query.get(data[i], {
+                    success: function(info){
+                        $('body').append('\
+                            <section class="ride">\
+                                <div class="route">\
+                                    <a href="ride.html" class="routeLink">\
+                                        <span class="origin">'+info.get("origin")+'-'+info.get("destination")+'</span>\
+                                        <p class="time">'+"Departs "+info.get("time")+'</p>\
+                                    </a>\
+                                </div>\
+                                <div class="seatCost">\
+                                    Per Seat:\
+                                    <p class="price">$'+info.get("price")+'</p>\
+                                </div>\
+                            </section>');
+                            $('.date').text("Rides for "+info.get("date"));
+                        } //end query success function
+                });
+            }
+             
+    </script>
 
 </body>
 </html>
