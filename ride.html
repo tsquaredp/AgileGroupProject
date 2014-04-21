@@ -9,6 +9,8 @@
     <!-- link calendar resources -->
     <link rel="stylesheet" type="text/css" href="calendar/tcal.css" />
     <script type="text/javascript" src="calendar/tcal.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
     
   </head>
 
@@ -24,45 +26,50 @@
 	 
 		<div class="bookingInfo">
 	  
-			<p> Add Booking Info Here </p>
-            <div class="gasInfo">
-            <!--     <!--<p>Passengers: </p>
-                <form action="gas">
-                    <select name="passenger">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </form>-->
-            </div>
+			<p class="rideInfo">Ride Info</p>
+				<div class="gasInfo">
+					<p class="rideInfo">Passengers:</p>
+					<form action="gas">
+						<select name="passenger">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+						</select>
+					</form>
+				</div>
 		</div>
 		
 		<div class="carInfo">
 		
-			<p> Car Info and Details </p>
+			<p class="carDetails">Car Info and Details</p>
 			<ul>
-				<li>Make: 'JSON object call, car.make'</li>
-				<li>Model: 'JSON object call, car.model'</li>
-				<li>Year: 'JSON object call, car.year'</li>
-				<li>Color: 'JSON object call, car.color'</li>
-				<li>Available Seats: 'JSON object call, car.seatsAvailable'</li>
-				<li>Car requirements: 'JSON object call, car.requirements'</li>
+				<li>Make: 'car.make'</li>
+				<li>Model: 'car.model'</li>
+				<li>Year: 'car.year'</li>
+				<li>Color: 'car.color'</li>
+				<li>Available Seats: 'ride.seats'</li>
+				<li>Car requirements: 'ride.smoke, ride.drink, ride.food'</li>
 			</ul>
 		
 		</div>
 		
 		<div class="driverInfo">
 		
-			<p> Add Driver Info Here </p>
+			<p class="driverDetails">Add Driver Info Here</p>
 		
 		</div>
 	  
     </div>
-		<div style="position: relative; top:300px; right: 500px; ">
-	
-			<a href="search.html">Home</a> || <a href="rideSearchResults.html">Search</a> || <a href="ride.html">Ride Details</a>
-		</div>
-    
+	<div style="position: relative; top:300px; right: 500px; ">
+
+		<a href="search.html">Home</a> || <a href="rideSearchResults.html">Search</a> || <a href="ride.html">Ride Details</a>
+	</div>
+		
+	<script>
+	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+	var query = window.location.search;
+	</script>
   </body>
 
 </html>
