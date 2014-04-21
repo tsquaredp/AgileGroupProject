@@ -4,9 +4,11 @@
 
   <title>Create Ride Objects</title>
   <link rel="stylesheet" type="text/css" href="calendar/tcal.css" />
+  <link rel="stylesheet" type="text/css" href="styles.css" />
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
   <script type="text/javascript" src="calendar/tcal.js"></script>
+  <script src="ride.js"></script>
 </head>
 <body>
     <section>
@@ -30,60 +32,26 @@
             <label for="price">Price: </label>
             <input type="text" id="price">
         </div>
-		<form name="details" method="POST">
-			<div class="formField">
-				<label for="smoke">Smoking?</label>
-					<input type="radio" id="smoke" value="Yes">Yes
-					<input type="radio" id="smoke" value="No">No
-			</div>
-			<div class="formField">
-				<label for="drink">Drinks?</label>
-					<input type="radio" id="drink" value="Yes">Yes
-					<input type="radio" id="drink" value="No">No
-			</div>
-			<div class="formField">
-				<label for="food">Food? </label>
-				<input type="radio" id="food" value="Yes">Yes
-				<input type="radio" id="food" value="No">No
-			</div>
-		</form>
         <div class="formField">
-            <label for="createRides">Create Ride: </label>
+            <label for="createRides">Create Rides: </label>
             <input type="button" id="createRides" value="Click">
         </div>
     </section>
     
 <script type="text/javascript">
 
-Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
 $("#createRides").click(function(){   
     
-    var origin = $("#origin").val();
-    var destination  = $("#destination").val();
-    var date = $("#date").val();
-    var price = parseFloat($("#price").val());
-    var time = $("#time").val();
+    var newRide =  Ride;
+    newRide.origin = $("#origin").val();
+    newRide.destination  = $("#destination").val();
+    newRide.date = $("#date").val();
+    newRide.price = parseFloat($("#price").val());
+    newRide.time = $("#time").val();
+    
+    newRide.insertRide(); 
+    console.log(newRide.destination);
 
-    var Ride = Parse.Object.extend("Ride");//create subclass of Parse.Object
-    var ride = new Ride();//new instance of that object (Ride) called ride
-     
-    ride.set("origin",origin);
-    ride.set("destination",destination);
-    ride.set("date",date);
-    ride.set("time",time);
-    ride.set("price",price);
-	ride.set("smoke",smoke);
-	ride.set("drink",drink);
-	ride.set("food",food);
-
-    ride.save(null , {
-        success: function(ride){
-            alert("ride "+ride.id+" saved.");
-        },
-        error: function(ride, error){
-            alert("Failed to create "+ride.id+" because "+error.description);
-        }
-    });
 });
 
   </script>
