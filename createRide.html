@@ -30,8 +30,25 @@
             <label for="price">Price: </label>
             <input type="text" id="price">
         </div>
+		<form name="details" method="POST">
+			<div class="formField">
+				<label for="smoke">Smoking?</label>
+					<input type="radio" id="smoke" value="Yes">Yes
+					<input type="radio" id="smoke" value="No">No
+			</div>
+			<div class="formField">
+				<label for="drink">Drinks?</label>
+					<input type="radio" id="drink" value="Yes">Yes
+					<input type="radio" id="drink" value="No">No
+			</div>
+			<div class="formField">
+				<label for="food">Food? </label>
+				<input type="radio" id="food" value="Yes">Yes
+				<input type="radio" id="food" value="No">No
+			</div>
+		</form>
         <div class="formField">
-            <label for="createRides">Create Rides: </label>
+            <label for="createRides">Create Ride: </label>
             <input type="button" id="createRides" value="Click">
         </div>
     </section>
@@ -48,13 +65,16 @@ $("#createRides").click(function(){
     var time = $("#time").val();
 
     var Ride = Parse.Object.extend("Ride");//create subclass of Parse.Object
-    var ride = new Ride();//new instance of that object (Ride) callled ride
+    var ride = new Ride();//new instance of that object (Ride) called ride
      
     ride.set("origin",origin);
     ride.set("destination",destination);
     ride.set("date",date);
     ride.set("time",time);
     ride.set("price",price);
+	ride.set("smoke",smoke);
+	ride.set("drink",drink);
+	ride.set("food",food);
 
     ride.save(null , {
         success: function(ride){
