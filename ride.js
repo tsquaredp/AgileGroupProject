@@ -9,6 +9,9 @@ var Ride = {
     date:this.date,
     time:this.time,
     price:this.price,
+	smoke:this.smoke,
+	drink:this.drink,
+	food:this.food,
 
     getOrigin: function (){
         return this.origin;
@@ -26,6 +29,15 @@ var Ride = {
     getPrice:function(){
         return this.price;
     },
+	getSmoke:function(){
+		return this.smoke;
+	},
+	getFood:function(){
+		return this.food;
+	},
+	getDrink:function(){
+		return this.drink;
+	},
     setOrigin:function(origin){
         this.origin = origin;
     },
@@ -41,6 +53,15 @@ var Ride = {
     setPrice:function(price){
         this.price = price;
     },
+	setSmoke:function(smoke){
+		this.smoke = smoke;
+	},
+	setFood:function(food){
+		this.food = food;
+	},
+	setDrink:function(drink){
+		this.drink = drink;
+	},
     
     insertRide:function (){
         Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
@@ -52,6 +73,9 @@ var Ride = {
         ride.set("date",this.date);
         ride.set("time",this.time);
         ride.set("price",this.price);
+		ride.set("smoke",this.smoke);
+		ride.set("food",this.food);
+		ride.set("drink",this.drink);
 
         ride.save(null , {
             success: function(ride){

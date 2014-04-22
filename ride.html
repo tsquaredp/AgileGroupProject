@@ -52,7 +52,7 @@
 				<li>Year: 'car.year'</li>
 				<li>Color: 'car.color'</li>
 				<li>Available Seats: 'ride.seats'</li>
-				<li>Car requirements: 'ride.smoke, ride.drink, ride.food'</li>
+				<li class="carReqs">Car requirements:</li>
 			</ul>
 		
 		</div>
@@ -82,7 +82,7 @@
 
 //works, but clunky 
     getRide(rideId);
-
+	
     function getRide(id){
         Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
         var Ride = Parse.Object.extend("Ride");
@@ -91,14 +91,17 @@
         query.get(id, {
           success: function(result) {
             // The object was retrieved successfully.
-           $(".rideTitle").text("Ride info for: "+result.get("origin")+" to "+result.get("destination"));
+			$(".rideTitle").text("Ride info for: "+result.get("origin")+" to "+result.get("destination"));
+			$(".carReqs").append("Smoking? " +result.get("smoke")+ "<br>Food? " +result.get("food")+ "<br>Drinks? " +result.get("drink"));
             origin = result.get("origin");
             destination = result.get("destination");
             time = result.get("time");
             date = result.get("date");
             price = result.get("price");
-            values(id, origin,destination ,time, date, price);//call external 'values()' function to pass out data
-            
+			smoke = result.get("smoke");
+			food = result.get("food");
+			drink = result.get("drink");
+            values(id, origin, destination,time, date, price, smoke, food, drink);//call external 'values()' function to pass out data
           },
           error: function(object, error) {
             // The object was not retrieved successfully.
@@ -110,12 +113,15 @@
         
         
     }
-    function values(id, origin, destination, time, date, price){
+    function values(id, origin, destination,time, date, price, smoke, food, drink){
         ride.origin = origin;
         ride.destination = destination;
         ride.time = time;
         ride.date = date;
         ride.price = price;
+		ride.smoke = smoke;
+		ride.food = food;
+		ride.drink = drink;
         
         calcRoute(origin,destination);//calcRoute - sets google map origin and destination
     }

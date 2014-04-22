@@ -32,6 +32,21 @@
             <label for="price">Price: </label>
             <input type="text" id="price">
         </div>
+		<div class="formField">
+            <label for="smoke">Smoking?</label>
+            <input type="radio" name="smoke" id="smoke" value="Yes">Yes
+			<input type="radio" name="smoke" id="smoke" value="No">No
+        </div>
+		<div class="formField">
+            <label for="food">Food?</label>
+            <input type="radio" name="food" id="food" value="Yes">Yes
+			<input type="radio" name="food" id="food" value="No">No
+        </div>
+		<div class="formField">
+            <label for="drink">Drinks?</label>
+            <input type="radio" name="drink" id="drink" value="Yes">Yes
+			<input type="radio" name="drink" id="drink" value="No">No
+        </div>
         <div class="formField">
             <label for="createRides">Create Rides: </label>
             <input type="button" id="createRides" value="Click">
@@ -48,7 +63,10 @@ $("#createRides").click(function(){
     newRide.date = $("#date").val();
     newRide.price = parseFloat($("#price").val());
     newRide.time = $("#time").val();
-    
+	newRide.smoke = $("#smoke").val();
+    newRide.food = $("#food").val();
+	newRide.drink = $("#drink").val();
+	
     newRide.insertRide(); 
     console.log(newRide.destination);
 
