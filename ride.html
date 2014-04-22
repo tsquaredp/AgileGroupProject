@@ -32,14 +32,15 @@
 			<p class="rideInfo">Ride Info</p>
 				<div class="gasInfo">
 					<p class="rideInfo">Passengers:</p>
-					<form action="gas">
-						<select name="passenger">
+					<form>
+						<select class="gasBox" name="passenger">
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
 						</select>
 					</form>
+					<h3 class="gasPrice">Price: $</h3>
 				</div>
 		</div>
 		
@@ -79,7 +80,6 @@
     }
     var rideId = query;
     var ride = Ride;
-
 //works, but clunky 
     getRide(rideId);
 	
@@ -93,6 +93,16 @@
             // The object was retrieved successfully.
 			$(".rideTitle").text("Ride info for: "+result.get("origin")+" to "+result.get("destination"));
 			$(".carReqs").append("Smoking? " +result.get("smoke")+ "<br>Food? " +result.get("food")+ "<br>Drinks? " +result.get("drink"));
+			
+			$(".gasBox").on('change', function(){
+				gasPricePerPerson = result.get("price") * $(".gasBox :selected").val();
+				$(".gasPrice").text("Price: $" + gasPricePerPerson);
+			});
+			
+			gasPricePerPerson = result.get("price") * $(".gasBox :selected").val();
+			$(".gasPrice").text("Price: $" + gasPricePerPerson);
+			
+
             origin = result.get("origin");
             destination = result.get("destination");
             time = result.get("time");
