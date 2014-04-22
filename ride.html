@@ -32,6 +32,7 @@
 			<p class="rideInfo">Ride Info</p>
 				<div class="gasInfo">
 					<p class="rideInfo">Passengers:</p>
+					<!-- eventually this form needs to be dynamically created-->
 					<form>
 						<select class="gasBox" name="passenger">
 							<option value="1">1</option>
@@ -40,7 +41,8 @@
 							<option value="4">4</option>
 						</select>
 					</form>
-					<h3 class="gasPrice">Price: $</h3>
+					<h3 class="gasPrice"></h3>
+					<button type="submit">Grab Seats!</button>
 				</div>
 		</div>
 		
@@ -101,6 +103,7 @@
 			
 			gasPricePerPerson = result.get("price") * $(".gasBox :selected").val();
 			$(".gasPrice").text("Price: $" + gasPricePerPerson);
+			
 			
 
             origin = result.get("origin");
