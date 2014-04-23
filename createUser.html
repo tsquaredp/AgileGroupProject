@@ -1,0 +1,52 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Create User</title>
+  <link rel="stylesheet" type="text/css" href="calendar/tcal.css" />
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+  <script type="text/javascript" src="calendar/tcal.js"></script>
+  <script src="user.js"></script>
+</head>
+<body>
+     <section>
+        <div class="formField">
+            <label for="fName">First Name: </label>
+            <input type="text" id="fName">
+        </div>
+        <div class="lName">
+            <label for="password">Last Name: </label>
+            <input type="text" id="lName">
+        </div>
+        <div class="formField">
+            <label for="user">User Name: </label>
+            <input type="text" id="user">
+        </div>
+        <div class="formField">
+            <label for="password">Password: </label>
+            <input type="text" id="password">
+        </div>
+        
+        
+        <div class="formField">
+            <label for="createUser">Create: </label>
+            <input type="button" id="createUser" value="Click">
+        </div>
+    </section>
+    
+<script type="text/javascript">
+$("#createUser").click(function(){
+    //user stuff
+    user = User;
+    
+    user.setFirstName($("#fName").val());
+    user.setLastName($("#lName").val());
+    user.setUserName($("#user").val());
+    user.setPassword($("#password").val());
+    
+    user.createUser();
+ 
+});
+</script>
