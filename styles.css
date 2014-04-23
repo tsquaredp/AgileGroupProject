@@ -47,8 +47,6 @@ html {
 
 .formField {
 	position: relative;
-	display: list-item;
-
 }
 
 .map {
@@ -80,6 +78,15 @@ html {
 	margin-right:auto;
 	margin-top:-35px;
 	
+}
+#content{
+    width:80%;
+	min-width:900px;
+	padding:20px;
+	padding-bottom:6px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:-35px;
 }
 
 /***Ride search results */
