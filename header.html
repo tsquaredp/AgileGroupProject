@@ -1,0 +1,23 @@
+    <!-- Links -->
+    <a href='search.html'>Ride Search</a> | <a href='createRide.html'>Create Ride</a>
+    
+    <!-- Login/Sign Up -->
+
+    <script>
+    // get value of the session cookies
+    var varSession = $.cookie('session');
+    var varFullName = $.cookie('fullName');
+    //
+    // if someone is logged in
+    //
+    if (varSession != null) {
+      $('#login').append("Welcome, "+varFullName+". | <a href='logOut.html'>Log Out");
+    }
+    //
+    // if someone is NOT logged in
+    //
+    if (varSession == null) {
+      $('#login').append("<a href='login.html'>Log In</a> | <a href='createUser.html'>Sign Up</a>");
+    }
+    </script>
+    <span id="login"></span>
