@@ -1,16 +1,28 @@
 <!doctype html>
-<head>
-  <meta charset="utf-8">
+<html lang="en">
 
-  <title>User Login</title>
-  <link rel="stylesheet" type="text/css" href="calendar/tcal.css" />
-  <link rel="stylesheet" type="text/css" href="styles.css" />
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
-  <script type="text/javascript" src="calendar/tcal.js"></script>
-  <script src="user.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <title>User Login</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    
+    <!-- link calendar resources -->
+    <link rel="stylesheet" type="text/css" href="calendar/tcal.css" />
+    <script type="text/javascript" src="calendar/tcal.js"></script>
+    
+    <!-- jQuery library and related functions -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.cookie.js"></script>
+    
+    <!-- parse library -->
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+    
+    <!-- *** TODO: provide a concise description of the purpose of this file here *** -->
+    <script src="user.js"></script>
+  </head>
+  
+  <body>
+  
      <section>
         <div class="formField">
             <label for="user">User Name: </label>
@@ -20,12 +32,12 @@
             <label for="password">Password: </label>
             <input type="text" id="password">
         </div>
-        
         <div class="formField">
             <label for="login">Login: </label>
             <input type="button" id="login" value="Click">
         </div>
     </section>
+    
     <section>
         <p><a href="createUser.html">Create New User</a></p>
     </section>
