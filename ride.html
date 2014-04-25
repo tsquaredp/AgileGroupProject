@@ -9,15 +9,32 @@
     <!-- link calendar resources -->
     <link rel="stylesheet" type="text/css" href="calendar/tcal.css" />
     <script type="text/javascript" src="calendar/tcal.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    
+    <!-- jQuery library and related functions -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script> // include header
+    $(function(){
+      $("#header").load("header.html"); 
+    });
+    </script>
+    <script type="text/javascript" src="jquery.cookie.js"></script>
+    
+    <!-- parse library -->
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+    
+    <!-- encapsulates objects and related functions -->
     <script src="ride.js"></script>
+    <script src="userMsg.js"></script>
+    
+    <!-- Google Maps -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJsHciAAws-EWj1LSL2UqO287q2mLVoE&sensor=false">
     </script>
 
   </head>
 
   <body>
+  
+    <div id="header"></div>
   
     <div id="content">
 	  <h3 class="rideTitle"></h3>
@@ -42,7 +59,7 @@
 						</select>
 					</form>
 					<h3 class="gasPrice"></h3>
-					<button type="submit">Grab Seats!</button>
+          <input type="button" id="sendRideRequest" value="Grab Seats!">
 				</div>
 		</div>
 		
@@ -180,10 +197,11 @@ function calcRoute(start,end) {
 
 //initialize googlemap
 google.maps.event.addDomListener(window, 'load', initialize);
- 
-    
-    
-        
+
+// this function handles adding a new ride request
+$("#sendRideRequest").click(function(){ 
+  alert("hey, you clicked me!");
+});
 	</script>
 
   </body>
