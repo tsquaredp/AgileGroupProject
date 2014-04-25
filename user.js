@@ -80,6 +80,23 @@ var User = {
             success: function(results){
                 if(results != null){
                     alert("Success,  "+results.get('fName')+"!");
+                    // create a cookie that will track the user's session
+                    $.cookie('session', results.id);
+                    
+                    var fName = results.get('fName');
+                    var lName = results.get('lName');
+                    var fullName = fName + " " + lName;
+                    $.cookie('fullName', fullName);
+                    
+                    // DEBUG
+                    // output the queried object's id
+                    // to make sure we're retrieving it properly
+                    // and that it's successfully stored into the cookie
+                    // DEBUG
+                    //alert(document.cookie);
+                    //var testReadCookie = $.cookie('session');
+                    //alert(testReadCookie);
+                    
                     window.location.replace("search.html");
                 }else{
                     alert("User or password not found.");
@@ -93,7 +110,5 @@ var User = {
             }
         });
     }
-
-
 
 };
