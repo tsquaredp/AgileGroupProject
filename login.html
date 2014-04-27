@@ -54,4 +54,7 @@ $("#login").click(function(){
     
     user.login(urlThing);
 });
+
+urlParam = getUrlParameter();
+if (urlParam != ""){ $("body").append("<p>Please log in to view this ride.</p>"); }
 </script>
