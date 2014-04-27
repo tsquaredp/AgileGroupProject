@@ -6,6 +6,7 @@
 var Ride = {  
     origin:this.origin,
     destination:this.destination,
+	seatsAvailable:this.seatsAvailable,
     date:this.date,
     time:this.time,
     price:this.price,
@@ -19,6 +20,9 @@ var Ride = {
     
     getDestination:function(){
         return this.destination;
+    },
+	getSeatsAvailable:function(){
+        return this.seatsAvailable;
     },
     getTime:function(){
         return this.time;
@@ -43,6 +47,9 @@ var Ride = {
     },
     setDestination:function(destination){
         this.destination = destination;
+    },
+	setSeatsAvailable:function(seatsAvailable){
+        this.seatsAvailable = seatsAvailable;
     },
     setTime:function(time){
         this.time = time;
@@ -70,6 +77,7 @@ var Ride = {
          
         ride.set("origin",this.origin);
         ride.set("destination",this.destination);
+		ride.set("seatsAvailable", this.seatsAvailable);
         ride.set("date",this.date);
         ride.set("time",this.time);
         ride.set("price",this.price);
