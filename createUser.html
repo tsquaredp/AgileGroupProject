@@ -14,31 +14,33 @@
 <body>
     <header id="header"></header>
      <section class="form">
-        <div class="formField">
-            <label for="fName">First Name: </label>
-            <input type="text" id="fName" required>
-        </div>
-        <div class="formField">
-            <label for="lName">Last Name: </label>
-            <input type="text" id="lName" required>
-        </div>
-        <div class="formField">
-            <label for="user">User Name: </label>
-            <input type="text" id="user" required>
-        </div>
-        <div class="formField">
-            <label for="password">Password: </label>
-            <input type="password" id="password" required>
-        </div>
-		<div class="formField">
-			<label for="age">Age: </label>
-			<input type="text" id="age" required>
-		</div>
-        <div class="formField">
-            <label for="email">Email: </label>
-            <input type="text" id="email" required>
-        </div>
-        
+		<form name="myForm">
+			<div class="formField">
+				<label for="fName">First Name: </label>
+				<input type="text" id="fName" required>
+			</div>
+			<div class="formField">
+				<label for="lName">Last Name: </label>
+				<input type="text" id="lName" required>
+			</div>
+			<div class="formField">
+				<label for="user">User Name: </label>
+				<input type="text" id="user" required>
+			</div>
+			<div class="formField">
+				<label for="password">Password: </label>
+				<input type="password" id="password" required>
+			</div>
+			<div class="formField">
+				<label for="age">Age: </label>
+				<input type="text" id="age" required>
+			</div>
+			<div class="formField">
+				<label for="email">Email: </label>
+				<input type="text" id="email" required>
+			</div>
+        </form>
+		
         <div class="formField">
             <label for="createUser">Create: </label>
             <input type="button" id="createUser" value="Click">
@@ -46,7 +48,13 @@
     </section>
     
 <script type="text/javascript">
+
 $("#createUser").click(function(){
+
+	validate();
+	alert("form validated");
+	validateEmail();
+	alert("email validated");
     //user stuff
     var userName = $("#user").val();
     var password = $("#password").val();
@@ -60,9 +68,58 @@ $("#createUser").click(function(){
     user.createUser();
  
 });
-</script>
-  <script> // include header
-    $(function(){
+
+function validate() {
+ 
+	if (document.myForm.fName.value == "") {
+		alert("A valid first name is needed");
+		document.myForm.fName.focus();
+		return false;
+	}
+	if (document.myForm.lName.value == "") {
+		alert("A valid last name is needed");
+		document.myForm.lName.focus();
+		return false;
+	}
+	if (document.myForm.email.value == "") {
+		alert("Please provide an email");
+		document.myForm.email.focus();
+		return false;
+	}
+	if (document.myForm.user.value == "") {
+		alert("Please provide a valid username");
+		document.myForm.user.focus();
+		return false;
+	}
+	if (document.myForm.password.value == "") {
+		alert("Please provide a password");
+		document.myForm.password.focus();
+		return false;
+	}
+	if (document.myForm.age.value == "") {
+		alert("Please provide a valid age");
+		document.myForm.age.focus();
+		return false;
+	}
+	
+	return(true);
+}
+
+function validateEmail() {
+
+	var emailID = document.myForm.email.value;
+	atpos = emailID.indexOf("@");
+	dotpos = emailID.lastIndexOf(".");
+	if (atpos < 1 || ( dotpos - atpos < 2 )) {
+		alert("Please enter correct email address")
+		document.myForm.email.focus() ;
+		return false;
+	}
+   return(true);
+}
+
+$(function(){
       $("#header").load("header.html"); 
-    });
-  </script>
+});
+	
+</script>
