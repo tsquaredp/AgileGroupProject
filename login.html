@@ -19,6 +19,7 @@
     
     <!-- *** TODO: provide a concise description of the purpose of this file here *** -->
     <script src="user.js"></script>
+    <script src="helperFunctions.js"></script>
   </head>
   
   <body>
@@ -47,9 +48,10 @@ $("#login").click(function(){
     //user stuff
     var userName = $("#user").val();
     var password = $("#password").val();
+    var urlThing = getUrlParameter();
     
     user = new User(userName, password,'' ,'' ,'' );
     
-    user.login();
+    user.login(urlThing);
 });
 </script>

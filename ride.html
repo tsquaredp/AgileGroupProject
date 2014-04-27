@@ -17,6 +17,7 @@
       $("#header").load("header.html"); 
     });
     </script>
+   
     <script type="text/javascript" src="jquery.cookie.js"></script>
     
     <!-- parse library -->
@@ -28,6 +29,26 @@
     
     <!-- Google Maps -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJsHciAAws-EWj1LSL2UqO287q2mLVoE&sensor=false">
+    </script>
+    <!--Session check/redirect-->
+    <script>
+    function getId(){	
+        var query = window.location.search;
+
+        //removes ? from query, leaving only id
+        if (query.substring(0, 1) == '?') {
+                query = query.substring(1);
+        }
+        return query;
+    };
+        
+        // get value of the session cookies
+        var varSession = $.cookie('session');
+
+        if (varSession == null) {
+            //console.log(varSession);
+            window.location.replace("login.html?"+getId());
+        }
     </script>
 
   </head>
@@ -90,14 +111,16 @@
 	</div>
 		
 	<script>
-	
+function getId(){	
 	var query = window.location.search;
 
     //removes ? from query, leaving only id
     if (query.substring(0, 1) == '?') {
             query = query.substring(1);
     }
-    var rideId = query;
+    return query;
+};
+    var rideId = getId();
     var ride = Ride;
 //works, but clunky 
     getRide(rideId);
