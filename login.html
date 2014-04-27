@@ -45,9 +45,10 @@
 <script type="text/javascript">
 $("#login").click(function(){
     //user stuff
-    user = User;
-    user.setUserName($("#user").val());
-    user.setPassword($("#password").val());
+    var userName = $("#user").val();
+    var password = $("#password").val();
+    
+    user = new User(userName, password,'' ,'' ,'' );
     
     user.login();
 });
