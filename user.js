@@ -50,6 +50,7 @@ User.prototype.createUser = function(){
 User.prototype.login = function(urlParam){
     Parse.User.logIn(this.userName, this.password, {
         success: function(user) {
+            $.cookie("session",user.id);
             // Do stuff after successful login.
             alert("success");
             if (urlParam == ""){
