@@ -20,6 +20,10 @@
             <label for="destination">Destination: </label>
             <input type="text" id="destination">
         </div>
+		<div class="formField">
+            <label for="seatsAvailable">Seats Available: </label>
+            <input type="text" id="seatsAvailable">
+        </div>
         <div class="formField">
             <label for="date">Date: </label>
             <input type="text" id="date" name="date" class="tcal" value="" size="21">
@@ -60,6 +64,7 @@ $("#createRides").click(function(){
     var newRide =  Ride;
     newRide.origin = $("#origin").val();
     newRide.destination  = $("#destination").val();
+	newRide.seatsAvailable = $("#seatsAvailable").val();
     newRide.date = $("#date").val();
     newRide.price = parseFloat($("#price").val());
     newRide.time = $("#time").val();
