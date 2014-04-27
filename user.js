@@ -1,11 +1,12 @@
 Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
 //function expression object
-var User = function(userName, password, email, firstName, lastName){
+var User = function(userName, password, email, firstName, lastName, age){
     this.userName = userName;
     this.password = password;
     this.email = email;
     this.firstName = firstName;
     this.lastName = lastName;
+	this.age = age;
     
 };
 
@@ -28,6 +29,7 @@ User.prototype.createUser = function(){
     user.set("email", this.email);
     user.set("firstName", this.firstName);
     user.set("lastName", this.lastName);
+	user.set("age", this.age);
      
     user.signUp(null, {
       success: function(user) {
@@ -88,7 +90,7 @@ User.prototype.findUser = function(id){
         console.log(object);
         
         //create User object from queried object
-        user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"));
+        user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"), object.get("age"));
         user.id = object.id; //assign id to User object
        
         user.populateEditUserForm();//call method that populates form
@@ -105,6 +107,7 @@ User.prototype.populateEditUserForm = function(){
     $("#lName").val(this.lastName);
     $("#user").val(this.userName);
     $("#password").hide();
+	$("#age").val(this.age);
     $("#email").val(this.email);
     $("#createUser").val("Edit User");
 };//end populateEditUserForm
@@ -124,7 +127,7 @@ User.prototype.getUsers = function(){
                 for (var i = 0; i < obj.length; i++) { 
                     var object = obj[i];
                     //console.log(object.id);
-                    user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"));
+                    user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"), object.get("age"));
                     user.id = object.id;
                     users[i] = user;
                 }
