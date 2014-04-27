@@ -65,6 +65,20 @@ body {
 .rideInfo {
     text-align: center;
 }
+/*Forms*/
+.form{
+    width: 20em;
+}
+
+.form .formField  input{
+    float:right;
+    width: 16em;
+}
+.form .formField  label{
+    float:left;
+    clear:both;
+}
+
 
 /* Wrappers and Headers */
 #wrapper {
