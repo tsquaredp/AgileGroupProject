@@ -28,6 +28,10 @@
             <label for="password">Password: </label>
             <input type="text" id="password">
         </div>
+        <div class="formField">
+            <label for="email">Email: </label>
+            <input type="text" id="email">
+        </div>
         
         
         <div class="formField">
@@ -39,13 +43,14 @@
 <script type="text/javascript">
 $("#createUser").click(function(){
     //user stuff
-    user = User;
+    var userName = $("#user").val();
+    var password = $("#password").val();
+    var email = $("#email").val();
+    var firstName = $("#fName").val();
+    var lastName = $("#lName").val();
     
-    user.setFirstName($("#fName").val());
-    user.setLastName($("#lName").val());
-    user.setUserName($("#user").val());
-    user.setPassword($("#password").val());
-    
+    user = new User(userName, password, email, firstName, lastName);
+ 
     user.createUser();
  
 });
