@@ -132,29 +132,35 @@ function getId(){
 
         query.get(id, {
           success: function(result) {
-            // The object was retrieved successfully.
-			$(".rideTitle").text("Ride info for: "+result.get("origin")+" to "+result.get("destination"));
-			$(".carReqs").append("Smoking? " +result.get("smoke")+ "<br>Food? " +result.get("food")+ "<br>Drinks? " +result.get("drink"));
-			
-			$(".gasBox").on('change', function(){
-				gasPricePerPerson = result.get("price") * $(".gasBox :selected").val();
-				$(".gasPrice").text("Price: $" + gasPricePerPerson);
-			});
-			
-			gasPricePerPerson = result.get("price") * $(".gasBox :selected").val();
-			$(".gasPrice").text("Price: $" + gasPricePerPerson);
-			
-			
-
             origin = result.get("origin");
             destination = result.get("destination");
+			seatsAvailable = result.get("seatsAvailable");
             time = result.get("time");
             date = result.get("date");
             price = result.get("price");
 			smoke = result.get("smoke");
 			food = result.get("food");
 			drink = result.get("drink");
-            values(id, origin, destination,time, date, price, smoke, food, drink);//call external 'values()' function to pass out data
+			
+            values(id, origin, destination,time, date, price, smoke, food, drink);//call external 'values()' function to pass out data           
+		   // The object was retrieved successfully.
+			$(".rideTitle").text("Ride info for: "+origin+" to "+destination);
+			$(".carReqs").append("Smoking? " +smoke+ "<br>Food? " +food+ "<br>Drinks? " +drink);
+			
+			for(var i=1; i<seatsAvailable; i++){
+				$(".gasBox").append("<option value="+i+">"+i+"</option>");
+			}
+			$(".gasBox").on('change', function(){
+				gasPricePerPerson = price * $(".gasBox :selected").val();
+				$(".gasPrice").text("Price: $" + gasPricePerPerson);
+			});
+			
+			gasPricePerPerson = price * $(".gasBox :selected").val();
+			$(".gasPrice").text("Price: $" + gasPricePerPerson);
+			
+			
+
+
           },
           error: function(object, error) {
             // The object was not retrieved successfully.
@@ -169,6 +175,7 @@ function getId(){
     function values(id, origin, destination,time, date, price, smoke, food, drink){
         ride.origin = origin;
         ride.destination = destination;
+		ride.seatsAvailable = seatsAvailable;
         ride.time = time;
         ride.date = date;
         ride.price = price;
