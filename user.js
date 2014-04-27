@@ -9,11 +9,16 @@ var User = function(userName, password, email, firstName, lastName){
     
 };
 
-//methods declared outside object block using prototype
+/*
+** Returns User's full name
+*/
 User.prototype.fullName = function(){
     return(this.firstName+" "+this.lastName);
-};
+};//end fullname
 
+/*
+** Creates user 
+*/
 
 User.prototype.createUser = function(){
     
@@ -37,6 +42,9 @@ User.prototype.createUser = function(){
     });
 };//end createUser
 
+/*
+** Logs this.User in
+*/
 User.prototype.login = function(){
     Parse.User.logIn(this.userName, this.password, {
         success: function(user) {
@@ -51,6 +59,10 @@ User.prototype.login = function(){
     });
 };//end login
 
+/*
+** Theoretically deletes User from Parse
+** TODO
+*/ 
 User.prototype.deleteUser = function(id){
     var query = new Parse.User;
     query.equalTo("id", id);
@@ -59,34 +71,47 @@ User.prototype.deleteUser = function(id){
     });
   
 
-};
+};//end deleteUser
 
+/*
+** Queries User in Parse for match by id
+*/
 
-User.prototype.findUser = function(){
+User.prototype.findUser = function(id){
     Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
-    var userList = new Array();
-    var query = new Parse.Query(Parse.Object.extend("UserDB"));
-    query.equalTo("fName", "John");
-    var findEm = function(userList){
-        query.find({
-          success: function(results, userList) {
-            //alert("Successfully retrieved " + results.length + " scores.");
-            // Do something with the returned Parse.Object values
-            for (var i = 0; i < results.length; i++) { 
-              var object = results[i];
-              //alert(object.id + ' - ' + object.get('playerName'));
-              userList[i] = new User();
-            }
-          },
-          error: function(error) {
-            alert("Error: " + error.code + " " + error.message);
-          }
+
+    var query = new Parse.Query(Parse.User);
+    query.equalTo("objectId", id);
+    query.first().then(function(object){
+        // Do something with the returned Parse.Object values
+        //console.log(object.get("firstName"));
+        console.log(object);
+        
+        //create User object from queried object
+        user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"));
+        user.id = object.id; //assign id to User object
+       
+        user.populateEditUserForm();//call method that populates form
         });
-    }
-    findEm();
-    return userList;
-    
+
 };
+
+/*
+** Populates editUser.html (or any form with these fields) with User properties
+*/
+User.prototype.populateEditUserForm = function(){
+    alert("hi");
+    $("#fName").val(this.firstName);
+    $("#lName").val(this.lastName);
+    $("#user").val(this.userName);
+    $("#password").hide();
+    $("#email").val(this.email);
+    $("#createUser").val("Edit User");
+};//end populateEditUserForm
+
+/*
+** Gets all Users in db (from Users) and puts them in <table> -- does two things -- fix me!
+*/
 
 User.prototype.getUsers = function(){
 
@@ -99,7 +124,7 @@ User.prototype.getUsers = function(){
                 for (var i = 0; i < obj.length; i++) { 
                     var object = obj[i];
                     //console.log(object.id);
-                    user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"))
+                    user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"));
                     user.id = object.id;
                     users[i] = user;
                 }
@@ -117,12 +142,10 @@ User.prototype.getUsers = function(){
             $(".deleteUser").click(function(){
                 var id = $(this).attr('id');
                 console.log(id);
-                window.location.replace("editUser.html?id="+id);
+                window.location.replace("editUser.html?"+id);
                 });
             });
             
-        });
-        
-        
-};
+        });        
+};//end getUsers
     
