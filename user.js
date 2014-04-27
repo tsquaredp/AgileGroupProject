@@ -47,12 +47,19 @@ User.prototype.createUser = function(){
 /*
 ** Logs this.User in
 */
-User.prototype.login = function(){
+User.prototype.login = function(urlParam){
     Parse.User.logIn(this.userName, this.password, {
         success: function(user) {
             // Do stuff after successful login.
+            $.cookie("session", user.id);
+            var fullName =  user.get("firstName")+" "+user.get("lastName");
+            $.cookie("fullName",fullName);
             alert("success");
-            window.location.replace("search.html");
+            if(urlParam == ""){
+                window.location.replace("search.html");
+            }else{
+                window.location.replace("ride.html?"+urlParam);
+            }
         },
         error: function(user, error) {
             // The login failed. Check error to see why.
