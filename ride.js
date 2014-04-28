@@ -76,6 +76,7 @@ var Ride = {
 		ride.set("smoke",this.smoke);
 		ride.set("food",this.food);
 		ride.set("drink",this.drink);
+        ride.set("driverId", $.cookie("session"));
 
         ride.save(null , {
             success: function(ride){
