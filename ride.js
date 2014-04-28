@@ -21,7 +21,11 @@ var Ride = {
     getDestination:function(){
         return this.destination;
     },
+
 	getSeatsAvailable:function(){
+    },
+    getSeatsAvailable:function(){
+
         return this.seatsAvailable;
     },
     getTime:function(){
@@ -48,7 +52,9 @@ var Ride = {
     setDestination:function(destination){
         this.destination = destination;
     },
-	setSeatsAvailable:function(seatsAvailable){
+
+    setSeatsAvailable:function(seatsAvailable){
+    
         this.seatsAvailable = seatsAvailable;
     },
     setTime:function(time){
