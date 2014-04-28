@@ -80,7 +80,7 @@ body {
 }
 
 
-/* Wrappers and Headers */
+/* Wrappers and Header Stuff */
 #wrapper {
     background-color:#FFFFFF;
     width:80%;
@@ -116,6 +116,15 @@ body {
 
 #login {
     float:right;
+}
+
+#mailIcon {
+	position:relative;
+	top:2px;
+}
+
+#newMessages a {
+	text-decoration:none;
 }
 
 #content {
