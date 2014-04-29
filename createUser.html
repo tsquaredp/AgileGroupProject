@@ -13,40 +13,42 @@
 </head>
 <body>
     <header id="header"></header>
-     <section class="form">
-		<form name="myForm">
-			<div class="formField">
-				<label for="fName">First Name: </label>
-				<input type="text" id="fName" placeholder="Your first name here." required>
-			</div>
-			<div class="formField">
-				<label for="lName">Last Name: </label>
-				<input type="text" id="lName" placeholder="Your last name here." required>
-			</div>
-			<div class="formField">
-				<label for="user">User Name: </label>
-				<input type="text" id="user" placeholder="More than 4 characters, less than 20." required>
-			</div>
-			<div class="formField">
-				<label for="password">Password: </label>
-				<input type="password" id="password" placeholder="Must be at least 8 characters." required>
-			</div>
-			<div class="formField">
-				<label for="age">Age: </label>
-				<input type="text" id="age" placeholder="Your age here." required>
-			</div>
-			<div class="formField">
-				<label for="email">Email: </label>
-				<input type="text" id="email" placeholder="Your email address here." required>
-			</div>
-        </form>
-		
-        <div class="formField">
-            <label for="createUser">Create: </label>
-            <input type="button" id="createUser" value="Click">
-        </div>
-    </section>
-    
+    <div id="wrapper">
+    <h2>Create User</h2>
+         <section class="form">
+            <form name="myForm">
+                <div class="formField">
+                    <label for="fName">First Name: </label>
+                    <input type="text" id="fName" placeholder="Your first name here." required>
+                </div>
+                <div class="formField">
+                    <label for="lName">Last Name: </label>
+                    <input type="text" id="lName" placeholder="Your last name here." required>
+                </div>
+                <div class="formField">
+                    <label for="user">User Name: </label>
+                    <input type="text" id="user" placeholder="More than 4 characters, less than 20." required>
+                </div>
+                <div class="formField">
+                    <label for="password">Password: </label>
+                    <input type="password" id="password" placeholder="Must be at least 8 characters." required>
+                </div>
+                <div class="formField">
+                    <label for="age">Age: </label>
+                    <input type="text" id="age" placeholder="Your age here." required>
+                </div>
+                <div class="formField">
+                    <label for="email">Email: </label>
+                    <input type="text" id="email" placeholder="Your email address here." required>
+                </div>
+            </form>
+            
+            <div class="formField">
+                <label for="createUser">Create: </label>
+                <input type="button" id="createUser" value="Click">
+            </div>
+        </section>
+    </div>
 <script type="text/javascript">
 
 ready = "false";
