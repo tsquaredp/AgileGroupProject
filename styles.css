@@ -70,7 +70,7 @@ body {
     width: 20em;
 }
 
-.form .formField  input{
+.form .formField  input, .form .formField  select, .form .formField  radio{
     float:right;
     width: 16em;
 }
