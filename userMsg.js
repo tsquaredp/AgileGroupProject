@@ -47,3 +47,56 @@ UserMsg.prototype.sendNewMessageRequest = function (){
 	});
 
 };
+
+UserMsg.prototype.displayMessagesInInbox = function () {
+	
+	alert("Hey! this method is running!");
+	// here, we want to get all the messages whose RecipentObjectId = the logged in user.
+	var newMessages = Parse.Object.extend("UserMsg");
+	var query = new Parse.Query(newMessages);
+	
+	query.equalTo("RecipentObjectId", $.cookie("session"));
+	query.find({
+		success: function(results) {
+			alert("You have " + results.length + " Unhandled Ride Requests.");
+			// print the messages
+			for (var i = 0; i < results.length; i++) {
+				var object = results[i];
+				
+				// find the User's name that matches the SenderObjectId
+				var user = new Parse.Object.extend("User");
+				var query2 = new Parse.Query(user);
+				
+				query2.get(object.get("SenderObjectId"), {
+					success: function(userResult) {
+						// got the User object whose name matches the id!
+						alert("whoa! 2.3!");
+						// Now we have to query to get the ride information...
+						var ride = new Parse.Object.extend("Ride");
+						var query3 = new Parse.Query(ride);
+						alert("whoa! 2!");
+						
+						query3.get(object.get("RideObjectId"), {
+							success: function(rideResult) {
+								// got the Ride object whose name matches the id!
+								// *finally* time to output the message...
+								alert("whoa! 3!");
+								$('#wrapper').append("<b>"+userResult.get("firstName")+" "+userResult.get("lastName")+"</b> Has made a ride a request to join the ride To: "+rideResult.get("origin")+"From: "+rideResult.get("destination")+".<br>");
+							},
+							error: function (object, error) {
+								alert("There was an error retrieving the ride object");
+								// Ride object was not retrieved successfully.
+							}	
+						});	
+					},
+					error: function(object, error) {
+						// User object was not retrieved successfully.
+					}
+				});
+			}
+		},
+		error: function(error) {
+			alert("Error: " + error.code + " " + error.message);
+		}
+	});
+};

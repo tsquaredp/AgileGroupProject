@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Ride Requests</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- link calendar resources -->
+    <link rel="stylesheet" type="text/css" href="calendar/tcal.css" />
+    <script type="text/javascript" src="calendar/tcal.js"></script>
+    
+    <!-- jQuery library and related functions -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script> // include header
+    $(function(){
+      $("#header").load("header.html"); 
+    });
+    </script>
+    <script type="text/javascript" src="jquery.cookie.js"></script>
+	<script src="helperFunctions.js"></script>
+	
+	<!-- parse library -->
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+	
+	<!-- encapsulates objects and related functions -->
+    <script src="ride.js"></script>
+    <script src="userMsg.js"></script>
+
+  </head>
+  
+  <body>
+    
+    <div id="header"></div>
+	
+	<div id="wrapper"></div>
+	
+	<script>
+		$(document).ready(function(){
+			var userMsg = new UserMsg();
+			userMsg.displayMessagesInInbox();
+		});
+	</script>
+	
+  </body>
+  
+</html>
