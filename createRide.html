@@ -61,11 +61,12 @@
 <script type="text/javascript">
 
 $("#createRides").click(function(){   
-    
+	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+	
     var newRide =  Ride;
-    newRide.origin = $("#origin").val();
-    newRide.destination  = $("#destination").val();
-	newRide.seatsAvailable = $("#seatsAvailable").val();
+    newRide.origin = $("#origin").val().toUpperCase();
+    newRide.destination  = $("#destination").val().toUpperCase();
+	newRide.seatsAvailable = parseInt($("#seatsAvailable").val());
     newRide.date = $("#date").val();
     newRide.price = parseFloat($("#price").val());
     newRide.time = $("#time").val();
@@ -75,6 +76,8 @@ $("#createRides").click(function(){
 	
     newRide.insertRide(); 
     console.log(newRide.destination);
+	
+	window.location.href="search.html";
 
 });
 
