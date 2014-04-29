@@ -70,7 +70,7 @@ body {
     width: 20em;
 }
 
-.form .formField  input, .form .formField  select, .form .formField  radio{
+.form .formField  input, .form .formField  select, .form .formField  small{
     float:right;
     width: 16em;
 }
@@ -88,6 +88,7 @@ body {
     padding:20px;
     margin-left:auto;
     margin-right:auto;
+    overflow: auto;
 }
 
 #wrapper a {
