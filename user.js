@@ -157,7 +157,7 @@ User.prototype.getUsers = function(){
         }).then(function(input){
             for(var i = 0; i < input.length; i++){
                 var display =("<tr><td>User: "+input[i].firstName+" "+input[i].lastName +" </td>");
-                var display = display.concat("<td>Username: "+input[i].userName+"</td><td><input type='button' class='deleteUser' id='"+input[i].id+"' value='Delete'></td></tr>");
+                var display = display.concat("<td>Username: "+input[i].userName+"</td><td><input type='button' class='deleteUser' id='"+input[i].id+"' value='Edit'></td></tr>");
                 $("#users").append(display);
 
             }
