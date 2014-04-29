@@ -52,12 +52,26 @@
             <label for="email">Email: </label>
             <input type="text" id="email">
         </div>
+        <div class="formField">
+            <label for="age">Age: </label>
+            <input type="text" id="age">
+        </div>
+  <!--      <div class="formField">
+            <label for="isActive">Active: </label>
+            <input type="text" id="isActive">
+        </div>
+ -->       <div class="formField">
+            <label for="true">Is Active: </label>
+            <input type="checkbox" name="isActive" id="isActive" value="true"></option>
+
+        </div>
         
         
         <div class="formField">
-            <label for="createUser">Create: </label>
-            <input type="button" id="createUser" value="Click">
+            <label for="updateUser">Update: </label>
+            <input type="button" id="updateUser" value="Update">
         </div>
+
     </section>
 		
 	<script>
@@ -67,10 +81,17 @@
         if (query.substring(0, 1) == '?') {
                 query = query.substring(1);
         }
-        
-        
+        //get user & populate fields
         user = new User();
         user.findUser(query);
+
+        
+        //button listeners
+        $("#updateUser").click(function(){
+            userman = new User($("#user").val(),'',$("#email").val(),$("#fName").val(),$("#lName").val(),$("#age").val());
+            userman.udpateUser(query);
+        });
+        
         
     </script>
  <!--   <script> // include header

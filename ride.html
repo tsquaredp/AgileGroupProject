@@ -73,10 +73,6 @@
 					<!-- eventually this form needs to be dynamically created-->
 					<form>
 						<select class="gasBox" name="passenger">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
 						</select>
 					</form>
 					<h3 class="gasPrice"></h3>
@@ -142,7 +138,7 @@ function getId(){
 			food = result.get("food");
 			drink = result.get("drink");
 			
-            values(id, origin, destination,time, date, price, smoke, food, drink);//call external 'values()' function to pass out data           
+            values(id, origin, destination, seatsAvailable, time, date, price, smoke, food, drink);//call external 'values()' function to pass out data           
 		   // The object was retrieved successfully.
 			$(".rideTitle").text("Ride info for: "+origin+" to "+destination);
 			$(".carReqs").append("Smoking? " +smoke+ "<br>Food? " +food+ "<br>Drinks? " +drink);
@@ -172,7 +168,7 @@ function getId(){
         
         
     }
-    function values(id, origin, destination,time, date, price, smoke, food, drink){
+    function values(id, origin, destination, seatsAvailable, time, date, price, smoke, food, drink){
         ride.origin = origin;
         ride.destination = destination;
 		ride.seatsAvailable = seatsAvailable;
