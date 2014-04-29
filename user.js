@@ -150,15 +150,22 @@ User.prototype.getUsers = function(){
                     //console.log(object.id);
                     user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"), object.get("age"));
                     user.id = object.id;
+                    user.isActive = object.get("isActive");
                     users[i] = user;
                 }
                 console.log(users);
                 return users
         }).then(function(input){
             for(var i = 0; i < input.length; i++){
-                var display =("<tr><td>User: "+input[i].firstName+" "+input[i].lastName +" </td>");
+                //set active status
+                if (input[i].isActive == true) {
+                    var active = "<td style='color:green'>Active</td>";
+                 }else {
+                    var active = "<td style='color:red'>Inactive</td>";
+                }
+                var display =("<tr>"+active+"<td>User: "+input[i].firstName+" "+input[i].lastName +" </td>");
                 var display = display.concat("<td>Username: "+input[i].userName+"</td><td><input type='button' class='deleteUser' id='"+input[i].id+"' value='Edit'></td></tr>");
-                $("#users").append(display);
+                $(".userTable").append(display);
 
             }
             
