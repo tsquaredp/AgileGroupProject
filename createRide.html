@@ -65,7 +65,7 @@ $("#createRides").click(function(){
     var newRide =  Ride;
     newRide.origin = $("#origin").val();
     newRide.destination  = $("#destination").val();
-	newRide.seatsAvailable = $("#seatsAvailable").val();
+	newRide.seatsAvailable = parseInt($("#seatsAvailable").val());
     newRide.date = $("#date").val();
     newRide.price = parseFloat($("#price").val());
     newRide.time = $("#time").val();

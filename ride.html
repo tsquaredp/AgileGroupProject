@@ -119,7 +119,7 @@ function getId(){
     return query;
 };
     var rideId = getId();
-    var ride = Ride;
+    var ride = new Ride();
 //works, but clunky 
     getRide(rideId);
 	
@@ -145,7 +145,6 @@ function getId(){
 			$(".rideTitle").text("Ride info for: "+origin+" to "+destination);
 			$(".carReqs").append("Smoking? " +smoke+ "<br>Food? " +food+ "<br>Drinks? " +drink);
 			
-			console.log(seatsAvailable);
 			
 			for(var i=1; i<=seatsAvailable; i++){
 				$(".gasBox").append("<option value="+i+">"+i+"</option>");
@@ -232,9 +231,28 @@ google.maps.event.addDomListener(window, 'load', initialize);
 $("#sendRideRequest").click(function(){ 
     var userMsg = new UserMsg();
     userMsg.sendNewMessageRequest();
-    
-  alert("hey, you clicked me!");
+	
+	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+	
+	var Ride = Parse.Object.extend("Ride");
+	var ride = new Ride();
+	
+	var seatsToTake = parseInt($(".gasBox").val());
+	newSeats = Ride.seatsAvailable - seatsToTake;
+	
+
+	
+	ride.save(id, {
+		success: function(ride){
+			ride.set("seatsAvailable", newSeats);
+			ride.save();
+		}
+	});
+	
+	window.location.href = "search.html";
 });
+
+
 	</script>
 
   </body>
