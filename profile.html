@@ -1,0 +1,61 @@
+<!doctype html>
+
+<head>
+<meta charset="utf-8">
+  <title>Profile Page</title>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+  <script type="text/javascript" src="jquery.cookie.js"></script>
+  <script type="text/javascript" src="user.js"></script>
+</head>
+
+<body>
+<h3>Profile Information</h3>
+<section class="form">
+<form name="myForm">
+
+    <div>
+      <img src="placeholder1.jpg">
+    </div>
+    <div class="formfield">
+        <label>Name:</label>
+        <input type="text" id="fName">
+        <input type="text" id="lName">
+    </div>
+    <div class="formfield">
+        <label>Username:</label>
+        <input type="text" id="user">
+    </div>
+    <div class="formfield">
+        <label>Age:</label>
+        <input type="text" id="age">
+    </div>
+    <div class="formfield">
+        <label>Email:</label>
+        <input type="text" id="email">
+    </div>
+</form>
+
+    <label for="saveChanges">Save Changes:</label>
+    <input type="button" id="saveChanges" value="Save">
+    <br>
+    <label>Search Rides</label>
+    <input type="button" id="searchRides" value="Ride Search">
+
+</section>
+
+<script>
+
+$("#name").attr("placeholder", "Hello");
+
+user = new User();
+user.findUser("puTp3szJJ4");
+
+$("#searchRides").click(function() {
+    window.location.replace("search.html");
+});
+</script>
+</body>
+
+</html>
