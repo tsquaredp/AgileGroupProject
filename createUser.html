@@ -51,7 +51,7 @@
     </div>
 <script type="text/javascript">
 
-ready = "false";
+ready = false;
 
 $("#createUser").click(function(){
 
@@ -67,7 +67,7 @@ $("#createUser").click(function(){
     
     user = new User(userName, password, email, firstName, lastName, age);
  
-	if (ready == "true") {
+	if (ready) {
 		user.createUser();
 	}
  
@@ -83,6 +83,7 @@ function validate() {
 	re = /^[A-Za-z]+$/;
 	if (!re.test(document.myForm.fName.value)) {
 		alert("First name must be only alphabetical characters");
+		document.myForm.fName.focus();
 		return false;
 	}
 	if (document.myForm.lName.value == "") {
@@ -92,6 +93,7 @@ function validate() {
 	}
 	if (!re.test(document.myForm.lName.value)) {
 		alert("Last name must be only alphabetical characters");
+		document.myForm.lName.focus();
 		return false;
 	}
 	if (document.myForm.user.value == "") {
@@ -121,8 +123,6 @@ function validate() {
 		return false;
 	}
 	if (isNaN(document.myForm.age.value)) {
-		console.log(document.myForm.age.value);
-		console.log(parseInt(document.myForm.age.value));
 		alert("Please provide an age that is a number.");
 		document.myForm.age.focus();
 		return false;
@@ -153,7 +153,7 @@ function validateEmail() {
 		return false;
 	}
 	
-	ready = "true";
+	ready = true;
 	return(true);
 }
 

@@ -45,10 +45,6 @@ body {
     margin-right: 10px;
 }
 
-.formField {
-    position: relative;
-}
-
 .map {
     float:left;
     border: solid;
@@ -65,20 +61,62 @@ body {
 .rideInfo {
     text-align: center;
 }
+
+
 /*Forms*/
+
+.formField {
+    position: relative;
+}
+
 .form{
-    width: 20em;
+    width: 22em;
 }
 
 .form .formField  input, .form .formField  select, .form .formField  small{
     float:right;
+	padding-left: 5px;
     width: 16em;
 }
+
 .form .formField  label, .form .formField  a{
     float:left;
     clear:both;
 }
 
+.formField span {
+	position: relative;
+}
+
+#smokeYes {
+	top: 40px;
+	left: 155px;
+}
+
+#smokeNo {
+	top: 55px;
+	left: 130px;
+}
+
+#drinkYes {
+	top: 68px;
+	left: 125px;
+}
+
+#drinkNo {
+	top: 83px;
+	left: 100px;
+}
+
+#foodYes {
+	top: 55px;
+	left: 155px;
+}
+
+#foodNo {
+	top: 72px;
+	left: 130px;
+}
 
 /* Wrappers and Headers */
 #wrapper {
