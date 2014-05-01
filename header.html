@@ -1,5 +1,6 @@
     <!-- Links -->
     <a href='search.html'>Ride Search</a>
+    <a href='profile.html' class="profile">Profile</a>
     
     <!-- Login/Sign Up -->
 
@@ -11,8 +12,31 @@
     // if someone is logged in
     //
     if (varSession != null) {
-      $('#login').append("Welcome, "+varFullName+". | <a href='logOut.html'>Log Out</a> | <a href='createRide.html'>Create Ride</a>");
+      $('#login').append("Welcome, "+varFullName+". ");
+	  
+	  //
+	  // Here, we're going to provide a link to access the UserMsg table and report
+	  // many messages match the session cookie (it should be matching the user's
+	  // objectId)
+	  //
+	  Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+	  
+	  var newMessages = Parse.Object.extend("UserMsg");
+	  var query = new Parse.Query(newMessages);
+	  
+	  query.equalTo("RecipentObjectId", varSession);
+	  query.count({
+		success: function(count) {
+		// The count request succeeded. Show the count.
+		$('#login').append("| <span id='newMessages'><a href='inbox.html'><img id='mailIcon' src='mail.png' alt='Ride Requests'>&nbsp"+count+"&nbsp</a></span>");
+		$('#login').append("| <a href='logOut.html'>Log Out</a> | <a href='createRide.html'>Create Ride</a>");
+	  },
+	  error: function(error) {
+		// The request failed
+	  }
+	  });
     }
+	
     //
     // if someone is NOT logged in
     //

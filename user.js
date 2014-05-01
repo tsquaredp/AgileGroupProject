@@ -119,7 +119,7 @@ User.prototype.findUser = function(id){
 ** Populates editUser.html (or any form with these fields) with User properties
 */
 User.prototype.populateEditUserForm = function(){
-    console.log(this.isActive);
+
     $("#fName").val(this.firstName);
     $("#lName").val(this.lastName);
     $("#user").val(this.userName);
@@ -142,7 +142,8 @@ User.prototype.getUsers = function(){
         var users = new Array();
 
         var query = new Parse.Query(Parse.User);
-   
+        
+        query.descending("isActive");
         query.find().then(function(obj){
             //console.log(obj.length);
                 for (var i = 0; i < obj.length; i++) { 
@@ -159,12 +160,12 @@ User.prototype.getUsers = function(){
             for(var i = 0; i < input.length; i++){
                 //set active status
                 if (input[i].isActive == true) {
-                    var active = "<td style='color:green'>Active</td>";
+                    var active = "<td style='background-color:#AEA'>Active</td>";
                  }else {
-                    var active = "<td style='color:red'>Inactive</td>";
+                    var active = "<td style='background-color:#EAA'>Inactive</td>";
                 }
-                var display =("<tr>"+active+"<td>User: "+input[i].firstName+" "+input[i].lastName +" </td>");
-                var display = display.concat("<td>Username: "+input[i].userName+"</td><td><input type='button' class='deleteUser' id='"+input[i].id+"' value='Edit'></td></tr>");
+                var display =("<tr>"+active+"<td>"+input[i].firstName+" "+input[i].lastName +"</td>");
+                var display = display.concat("<td>"+input[i].userName+"</td><td><input type='button' class='deleteUser' id='"+input[i].id+"' value='Edit'></td></tr>");
                 $(".userTable").append(display);
 
             }
