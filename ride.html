@@ -18,6 +18,7 @@
     });
     </script>
     <script type="text/javascript" src="jquery.cookie.js"></script>
+    <script src="helperFunctions.js"></script>
     
     <!-- parse library -->
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
@@ -28,6 +29,26 @@
     
     <!-- Google Maps -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJsHciAAws-EWj1LSL2UqO287q2mLVoE&sensor=false">
+    </script>
+    <!--Session check/redirect-->
+    <script>
+    function getId(){	
+        var query = window.location.search;
+
+        //removes ? from query, leaving only id
+        if (query.substring(0, 1) == '?') {
+                query = query.substring(1);
+        }
+        return query;
+    };
+        
+        // get value of the session cookies
+        var varSession = $.cookie('session');
+        //console.log(varSession);
+        if (varSession == null) {
+            //console.log(varSession);
+            window.location.replace("login.html?"+getId());
+        }
     </script>
 
   </head>
@@ -52,10 +73,6 @@
 					<!-- eventually this form needs to be dynamically created-->
 					<form>
 						<select class="gasBox" name="passenger">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
 						</select>
 					</form>
 					<h3 class="gasPrice"></h3>
@@ -90,14 +107,16 @@
 	</div>
 		
 	<script>
-	
+function getId(){	
 	var query = window.location.search;
 
     //removes ? from query, leaving only id
     if (query.substring(0, 1) == '?') {
             query = query.substring(1);
     }
-    var rideId = query;
+    return query;
+};
+    var rideId = getId();
     var ride = Ride;
 //works, but clunky 
     getRide(rideId);
@@ -109,29 +128,37 @@
 
         query.get(id, {
           success: function(result) {
-            // The object was retrieved successfully.
-			$(".rideTitle").text("Ride info for: "+result.get("origin")+" to "+result.get("destination"));
-			$(".carReqs").append("Smoking? " +result.get("smoke")+ "<br>Food? " +result.get("food")+ "<br>Drinks? " +result.get("drink"));
-			
-			$(".gasBox").on('change', function(){
-				gasPricePerPerson = result.get("price") * $(".gasBox :selected").val();
-				$(".gasPrice").text("Price: $" + gasPricePerPerson);
-			});
-			
-			gasPricePerPerson = result.get("price") * $(".gasBox :selected").val();
-			$(".gasPrice").text("Price: $" + gasPricePerPerson);
-			
-			
-
             origin = result.get("origin");
             destination = result.get("destination");
+			seatsAvailable = result.get("seatsAvailable");
             time = result.get("time");
             date = result.get("date");
             price = result.get("price");
 			smoke = result.get("smoke");
 			food = result.get("food");
 			drink = result.get("drink");
-            values(id, origin, destination,time, date, price, smoke, food, drink);//call external 'values()' function to pass out data
+			
+            values(id, origin, destination, seatsAvailable, time, date, price, smoke, food, drink);//call external 'values()' function to pass out data           
+		   // The object was retrieved successfully.
+			$(".rideTitle").text("Ride info for: "+origin+" to "+destination);
+			$(".carReqs").append("Smoking? " +smoke+ "<br>Food? " +food+ "<br>Drinks? " +drink);
+			
+			console.log(seatsAvailable);
+			
+			for(var i=1; i<=seatsAvailable; i++){
+				$(".gasBox").append("<option value="+i+">"+i+"</option>");
+			}
+			$(".gasBox").on('change', function(){
+				gasPricePerPerson = price * $(".gasBox :selected").val();
+				$(".gasPrice").text("Price: $" + gasPricePerPerson);
+			});
+			
+			gasPricePerPerson = price * $(".gasBox :selected").val();
+			$(".gasPrice").text("Price: $" + gasPricePerPerson);
+			
+			
+
+
           },
           error: function(object, error) {
             // The object was not retrieved successfully.
@@ -143,9 +170,10 @@
         
         
     }
-    function values(id, origin, destination,time, date, price, smoke, food, drink){
+    function values(id, origin, destination, seatsAvailable, time, date, price, smoke, food, drink){
         ride.origin = origin;
         ride.destination = destination;
+		ride.seatsAvailable = seatsAvailable;
         ride.time = time;
         ride.date = date;
         ride.price = price;
@@ -200,7 +228,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 // this function handles adding a new ride request
 $("#sendRideRequest").click(function(){ 
-  alert("hey, you clicked me!");
+    var userMsg = new UserMsg();
+    userMsg.sendNewMessageRequest();
 });
 	</script>
 

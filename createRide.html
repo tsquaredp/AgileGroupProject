@@ -8,6 +8,7 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
   <script type="text/javascript" src="calendar/tcal.js"></script>
+  <script type="text/javascript" src="jquery.cookie.js"></script>
   <script src="ride.js"></script>
 </head>
 <body>
@@ -19,6 +20,10 @@
         <div class="formField">
             <label for="destination">Destination: </label>
             <input type="text" id="destination">
+        </div>
+		<div class="formField">
+            <label for="seatsAvailable">Seats Available: </label>
+            <input type="text" id="seatsAvailable">
         </div>
         <div class="formField">
             <label for="date">Date: </label>
@@ -56,10 +61,12 @@
 <script type="text/javascript">
 
 $("#createRides").click(function(){   
-    
+	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+	
     var newRide =  Ride;
-    newRide.origin = $("#origin").val();
-    newRide.destination  = $("#destination").val();
+    newRide.origin = $("#origin").val().toUpperCase();
+    newRide.destination  = $("#destination").val().toUpperCase();
+	newRide.seatsAvailable = parseInt($("#seatsAvailable").val());
     newRide.date = $("#date").val();
     newRide.price = parseFloat($("#price").val());
     newRide.time = $("#time").val();
@@ -69,6 +76,8 @@ $("#createRides").click(function(){
 	
     newRide.insertRide(); 
     console.log(newRide.destination);
+	
+	window.location.href="search.html";
 
 });
 

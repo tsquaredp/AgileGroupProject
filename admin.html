@@ -19,16 +19,21 @@
 </head>
 <body>
     <div id="header"></div>
-    <section id="users">
-        <table class="userTable">
-            <tr>
-                <th>User's Full Name</th>
-                <th>Username</th>
-                <th>Action</th>
-            </tr>
-        </table>
-    </section>
     
+    <div id="wrapper">
+        <h2>Edit Users</h2>
+        <section id="users">
+            <table class="userTable">
+                <tr>    
+                    <th>Status</th>
+                    <th>User's Full Name</th>
+                    <th>Username</th>
+                    <th>Action</th>
+                </tr>
+            </table>
+        </section>
+    </div>
+        
 <script type="text/javascript">
 user = new User();
 user.getUsers();
@@ -43,8 +48,6 @@ $(document).ready(function(){
     });
 }); 
 </script>
-  <script> // include header
-
-     // $("#header").load("header.html"); 
-
-    </script>
+<script> // include header
+      $("#header").load("header.html"); 
+</script>

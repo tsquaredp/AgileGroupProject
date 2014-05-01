@@ -13,40 +13,50 @@
 </head>
 <body>
     <header id="header"></header>
-     <section class="form">
-        <div class="formField">
-            <label for="fName">First Name: </label>
-            <input type="text" id="fName" required>
-        </div>
-        <div class="formField">
-            <label for="lName">Last Name: </label>
-            <input type="text" id="lName" required>
-        </div>
-        <div class="formField">
-            <label for="user">User Name: </label>
-            <input type="text" id="user" required>
-        </div>
-        <div class="formField">
-            <label for="password">Password: </label>
-            <input type="password" id="password" required>
-        </div>
-		<div class="formField">
-			<label for="age">Age: </label>
-			<input type="text" id="age" required>
-		</div>
-        <div class="formField">
-            <label for="email">Email: </label>
-            <input type="text" id="email" required>
-        </div>
-        
-        <div class="formField">
-            <label for="createUser">Create: </label>
-            <input type="button" id="createUser" value="Click">
-        </div>
-    </section>
-    
+    <div id="wrapper">
+    <h2>Create User</h2>
+         <section class="form">
+            <form name="myForm">
+                <div class="formField">
+                    <label for="fName">First Name: </label>
+                    <input type="text" id="fName" placeholder="Your first name here." required>
+                </div>
+                <div class="formField">
+                    <label for="lName">Last Name: </label>
+                    <input type="text" id="lName" placeholder="Your last name here." required>
+                </div>
+                <div class="formField">
+                    <label for="user">User Name: </label>
+                    <input type="text" id="user" placeholder="More than 4 characters, less than 20." required>
+                </div>
+                <div class="formField">
+                    <label for="password">Password: </label>
+                    <input type="password" id="password" placeholder="Must be at least 8 characters." required>
+                </div>
+                <div class="formField">
+                    <label for="age">Age: </label>
+                    <input type="text" id="age" placeholder="Your age here." required>
+                </div>
+                <div class="formField">
+                    <label for="email">Email: </label>
+                    <input type="text" id="email" placeholder="Your email address here." required>
+                </div>
+            </form>
+            
+            <div class="formField">
+                <label for="createUser">Create: </label>
+                <input type="button" id="createUser" value="Click">
+            </div>
+        </section>
+    </div>
 <script type="text/javascript">
+
+ready = "false";
+
 $("#createUser").click(function(){
+
+	validate();
+	validateEmail();
     //user stuff
     var userName = $("#user").val();
     var password = $("#password").val();
@@ -57,12 +67,98 @@ $("#createUser").click(function(){
     
     user = new User(userName, password, email, firstName, lastName, age);
  
-    user.createUser();
+	if (ready == "true") {
+		user.createUser();
+	}
  
 });
-</script>
-  <script> // include header
-    $(function(){
+
+function validate() {
+ 
+	if (document.myForm.fName.value == "") {
+		alert("A valid first name is needed");
+		document.myForm.fName.focus();
+		return false;
+	}
+	re = /^[A-Za-z]+$/;
+	if (!re.test(document.myForm.fName.value)) {
+		alert("First name must be only alphabetical characters");
+		return false;
+	}
+	if (document.myForm.lName.value == "") {
+		alert("A valid last name is needed");
+		document.myForm.lName.focus();
+		return false;
+	}
+	if (!re.test(document.myForm.lName.value)) {
+		alert("Last name must be only alphabetical characters");
+		return false;
+	}
+	if (document.myForm.user.value == "") {
+		alert("Please provide a valid username");
+		document.myForm.user.focus();
+		return false;
+	}
+	if (document.myForm.password.value == "") {
+		alert("Please provide a password");
+		document.myForm.password.focus();
+		return false;
+	}
+	if (document.myForm.password.value.length < 8) {
+		alert("Password must be 8 characters or greater")
+		document.myForm.password.focus();
+		return false;
+	}
+	re = /^\w+$/;
+	if (!re.test(document.myForm.password.value)) {
+		alert("Your password must only contain letters and numbers");
+		document.myForm.password.focus();
+		return false;
+	}
+	if (document.myForm.age.value == "") {
+		alert("Please provide an age.");
+		document.myForm.age.focus();
+		return false;
+	}
+	if (isNaN(document.myForm.age.value)) {
+		console.log(document.myForm.age.value);
+		console.log(parseInt(document.myForm.age.value));
+		alert("Please provide an age that is a number.");
+		document.myForm.age.focus();
+		return false;
+	}
+	if (document.myForm.age.value < 16) {
+		console.log(document.myForm.age.value);
+		alert("You must be 16 or older");
+		document.myForm.age.focus();
+		return false;
+	}
+	if (document.myForm.email.value == "") {
+		alert("Please provide an email");
+		document.myForm.email.focus();
+		return false;
+	}
+	
+	return(true);
+}
+
+function validateEmail() {
+
+	var emailID = document.myForm.email.value;
+	atpos = emailID.indexOf("@");
+	dotpos = emailID.lastIndexOf(".");
+	if (atpos < 1 || ( dotpos - atpos < 2 )) {
+		alert("Please enter correct email address")
+		document.myForm.email.focus() ;
+		return false;
+	}
+	
+	ready = "true";
+	return(true);
+}
+
+$(function(){
       $("#header").load("header.html"); 
-    });
-  </script>
+});
+	
+</script>

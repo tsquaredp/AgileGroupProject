@@ -30,36 +30,48 @@
   <body>
   
     <header id="header"></header>
-  
-   <section class="form">
-        <div class="formField">
-            <label for="fName">First Name: </label>
-            <input type="text" id="fName">
-        </div>
-        <div class="formField">
-            <label for="lName">Last Name: </label>
-            <input type="text" id="lName">
-        </div>
-        <div class="formField">
-            <label for="user">User Name: </label>
-            <input type="text" id="user">
-        </div>
-        <div class="formField">
-            <label for="password">Password: </label>
-            <input type="text" id="password">
-        </div>
-        <div class="formField">
-            <label for="email">Email: </label>
-            <input type="text" id="email">
-        </div>
+    <div id="wrapper">
+    <h2>Edit User</h2>
+       <section class="form">
+            <div class="formField">
+                <label for="fName">First Name: </label>
+                <input type="text" id="fName">
+            </div>
+            <div class="formField">
+                <label for="lName">Last Name: </label>
+                <input type="text" id="lName">
+            </div>
+            <div class="formField">
+                <label for="user">User Name: </label>
+                <input type="text" id="user">
+            </div>
+            <div class="formField">
+                <label for="password">Password: </label>
+                <input type="text" id="password">
+            </div>
+            <div class="formField">
+                <label for="email">Email: </label>
+                <input type="text" id="email">
+            </div>
+            <div class="formField">
+                <label for="age">Age: </label>
+                <input type="text" id="age">
+            </div>
+            <div class="formField">
+                <label for="true">Is Active: </label>
+                <input type="checkbox" name="isActive" id="isActive" value="true"></option>
+
+            </div>
+            <div class="formField">
+
+                <input type="button" id="updateUser" value="Update">
+            </div>
+            <div class="formField">
+                <a href="admin.html"><input type="button" id="cancel" value="Cancel"></a>
+            </div>
+        </section>
         
-        
-        <div class="formField">
-            <label for="createUser">Create: </label>
-            <input type="button" id="createUser" value="Click">
-        </div>
-    </section>
-		
+	</div>	
 	<script>
     	var query = window.location.search;
 
@@ -67,13 +79,20 @@
         if (query.substring(0, 1) == '?') {
                 query = query.substring(1);
         }
-        
-        
+        //get user & populate fields
         user = new User();
         user.findUser(query);
+
+        
+        //button listeners
+        $("#updateUser").click(function(){
+            userman = new User($("#user").val(),'',$("#email").val(),$("#fName").val(),$("#lName").val(),$("#age").val());
+            userman.udpateUser(query);
+        });
+        
         
     </script>
- <!--   <script> // include header
+    <script> // include header
         $(function(){
           $("#header").load("header.html"); 
         });
