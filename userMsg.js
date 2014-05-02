@@ -25,20 +25,26 @@ UserMsg.prototype.sendNewMessageRequest = function (){
 		
 		// we're going to need 3 values:
 		// - The object ID of the person sending the request
-		// - The object ID of the person recieving the request
+		// - The object ID of the person receiving the request
 		// - The object ID of the ride
 		msg.set("SenderObjectId",$.cookie("session"));
 		msg.set("RecipentObjectId", driverID);
 		msg.set("RideObjectId",getUrlParameter());
 
-		msg.save(null , {
-		  success: function(msg) {
-			alert("Request Sent.");
-		  },
-		  error: function(msg, error){
-			alert("Failed to send request");
-		  }
-		});
+		// check to see if the sender matchers the receiver to prevent
+		// a user from sending a request to themselves
+		if ($.cookie("session") != driverID) {
+			msg.save(null , {
+			  success: function(msg) {
+				alert("Request Sent.");
+			  },
+			  error: function(msg, error){
+				alert("Failed to send request");
+			  }
+			});
+		} else {
+			alert("You cannot add yourself to your own ride.");
+		}
 	},
 	error: function(object, error) {
 		// something went wrong and we couldn't get the driver ID
