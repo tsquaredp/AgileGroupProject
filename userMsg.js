@@ -56,6 +56,7 @@ UserMsg.prototype.sendNewMessageRequest = function (){
 
 UserMsg.prototype.displayMessagesInInbox = function () {
 	
+	/*
 	// here, we want to get all the messages whose RecipentObjectId = the logged in user.
 	var newMessages = Parse.Object.extend("UserMsg");
 	var query = new Parse.Query(newMessages);
@@ -67,6 +68,7 @@ UserMsg.prototype.displayMessagesInInbox = function () {
 			// print the messages using a loop
 			for (var i = 0; i < results.length; i++) {
 				var object = results[i];
+				alert("Hey");
 				
 				// find the User's name that matches the SenderObjectId
 				var user = new Parse.Object.extend("User");
@@ -83,7 +85,7 @@ UserMsg.prototype.displayMessagesInInbox = function () {
 							success: function(rideResult) {
 								// got the Ride object whose name matches the id!
 								// *finally* time to output the message...
-								$('#wrapper').append("<b>"+userResult.get("firstName")+" "+userResult.get("lastName")+"</b> wants to join the ride To: <b>"+rideResult.get("origin")+" - From: "+rideResult.get("destination")+".</b> <a href=inbox.html>Accept</a> <a href=inbox.html>Delete</a> <br>");
+								$('#wrapper').append("<b>"+userResult.get("firstName")+" "+userResult.get("lastName")+"</b> wants to join the ride To: <b>"+rideResult.get("origin")+" - From: "+rideResult.get("destination")+".</b> <a href=inbox.html>Accept</a> <a href=inbox.html?remove="+object.id+">Delete</a> <br>");
 							},
 							error: function (object, error) {
 								alert("There was an error retrieving the ride object");
@@ -101,4 +103,33 @@ UserMsg.prototype.displayMessagesInInbox = function () {
 			alert("Error: " + error.code + " " + error.message);
 		}
 	});
+	*/
+	
+	// let's try this again...
+	// here, we want to get all the messages whose RecipentObjectId = the logged in user.
+	var newMessages = Parse.Object.extend("UserMsg");
+	var query = new Parse.Query(newMessages);
+	query.equalTo("RecipentObjectId", $.cookie("session"));
+	
+	var user = new Parse.Object.extend("User");
+	var query2 = new Parse.Query(user);
+	
+	var ride = Parse.Object.extend("Ride");
+	var query3 = new Parse.Query(ride);
+	
+	var object;
+	
+	query.find().then(function(query) {
+		return query;
+	}).then(function(results) {
+		//for (var i = 0; i < results.length; i++) {
+			var object = results[0];
+			return query2.get(object.get("SenderObjectId"));
+		}).then(function(userResult) {
+			$('#wrapper').append(userResult.get("firstName")+" "+userResult.get("lastName"));
+			return query3.get(object.get("RideObjectId"));
+		}).then(function(rideResult) {
+			$('#wrapper').append(" wants to join the ride <b>To: "+rideResult.get("origin")+" - From: "+rideResult.get("destination")+".</b> <a href=inbox.html>Accept</a> <a href=inbox.html?remove="+object.id+">Delete</a> <br>");
+		});
+	//}
 };
