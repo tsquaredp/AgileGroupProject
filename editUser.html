@@ -21,6 +21,9 @@
     <!--User-->
     <script src="user.js"></script>
     
+    <!--Role-->
+    <script src="role.js"></script>
+    
     <!-- Google Maps -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJsHciAAws-EWj1LSL2UqO287q2mLVoE&sensor=false">
     </script>
@@ -69,6 +72,9 @@
             <div class="formField">
                 <a href="admin.html"><input type="button" id="cancel" value="Cancel"></a>
             </div>
+            <div class="formField">
+                <input type="button" id="test" value="Make Admin">
+            </div>
         </section>
         
 	</div>	
@@ -88,6 +94,11 @@
         $("#updateUser").click(function(){
             userman = new User($("#user").val(),'',$("#email").val(),$("#fName").val(),$("#lName").val(),$("#age").val());
             userman.udpateUser(query);
+        });
+        $("#test").click(function(){
+            role = new Role();
+            //role.createRole("User");
+            role.updateRoleACL("Administrator");
         });
         
         

@@ -70,6 +70,17 @@ User.prototype.udpateUser = function(id){
   
 };//end UpdateUser
 
+User.prototype.createRole = function(id){
+     Parse.Cloud.run('createRole',{userId:id},{
+        success: function(status){
+            alert(status);
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+};
+
 /*
 ** Logs this.User in
 */
@@ -181,7 +192,23 @@ User.prototype.getUsers = function(){
         });        
 };//end getUsers
 
+User.prototype.getUserFromParse = function(id){
+    Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
 
+    var query = new Parse.Query(Parse.User);
+    query.equalTo("objectId", id);
+    query.first().then(function(object){
+        // Do something with the returned Parse.Object values
+        //create User object from queried object
+        user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"), object.get("age"));
+        user.id = object.id; //assign id to User object
+        user.isActive = object.get("isActive");
+        
+        return user;
+        //user.populateEditUserForm();//call method that populates form
+        });
+
+};
 
 
 //TODO - not working yet
@@ -189,9 +216,12 @@ User.prototype.createRole = function() {
       var roleACL = new Parse.ACL();
       roleACL.setWriteAccess(Parse.User.current(), true);
       roleACL.setPublicReadAccess(true);
+      this.User.setACL(roleACL);
+      /*
       var role = new Parse.Role("Administrator", roleACL);
       role.getUsers().add(Parse.User.current());
 
+      
       role.save(null, {
           success: function(saveObject) {
               // The object was saved successfully.
@@ -204,6 +234,7 @@ User.prototype.createRole = function() {
               //assignRoles();
            }
       });
+      */
     };
 //TODO - not working yet
 User.prototype.updateRoleACL = function(role) {

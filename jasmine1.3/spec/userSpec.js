@@ -16,5 +16,11 @@ describe("User", function() {
     expect(user.firstName).toBe("Name");
   });
   
+  it("should return a parse user"), function(){
+    user.getUserFromParse("yG11N94EUH");
+   // expect(user.firstName).toBe("Trang");
+   // expect(user.lastName).toBe("Phang");
+    expect(user.username).not.toBe("dad");
+  }
   
 });
