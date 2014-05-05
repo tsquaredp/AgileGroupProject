@@ -230,6 +230,26 @@ google.maps.event.addDomListener(window, 'load', initialize);
 $("#sendRideRequest").click(function(){ 
     var userMsg = new UserMsg();
     userMsg.sendNewMessageRequest();
+	
+	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+	
+	var Ride = Parse.Object.extend("Ride");
+	var ride = new Ride();
+	
+	var seatsToTake = parseInt($(".gasBox").val());
+	newSeats = Ride.seatsAvailable - seatsToTake;
+	
+
+	
+	ride.save(null, {
+		success: function(ride){
+			ride.set("seatsAvailable", newSeats);
+			ride.save();
+		}
+	});
+	
+	window.location.href = "search.html";
+
 });
 	</script>
 

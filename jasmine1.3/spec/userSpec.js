@@ -16,5 +16,10 @@ describe("User", function() {
     expect(user.firstName).toBe("Name");
   });
   
+  it("should have a last name", function(){
+	user.lastName = "Name";
+	expect(user.lastName).toBe("Name");
+  });
+  
   
 });

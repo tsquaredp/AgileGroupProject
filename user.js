@@ -48,7 +48,7 @@ User.prototype.createUser = function(){
 /*
 ** Updates user - uses Cloud Code
 */
-User.prototype.udpateUser = function(id){
+User.prototype.updateUser = function(id){
         var firstName =  $("#fName").val();
         var lastName =  $("#lName").val();
         var username =  $("#user").val();
