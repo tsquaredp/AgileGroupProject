@@ -8,9 +8,6 @@ body {
     height:100%;
 }
 
-#map-canvas { 
-    height: 100%;
-}
 
 .bookingInfo {
     float:right;
@@ -45,6 +42,12 @@ body {
     margin-right: 10px;
 }
 
+.gasInfo {
+    margin-left:30px;
+    border: solid;
+    width: 70%;
+}
+
 .map {
     float:left;
     border: solid;
@@ -52,11 +55,10 @@ body {
     height: 500px;
 }
 
-.gasInfo {
-    margin-left:30px;
-    border: solid;
-    width: 70%;
+#map-canvas { 
+    height: 100%;
 }
+
 
 .rideInfo {
     text-align: center;
@@ -64,6 +66,26 @@ body {
 
 
 /*Forms*/
+
+#drinkYes {
+	top: 68px;
+	left: 125px;
+}
+
+#drinkNo {
+	top: 83px;
+	left: 100px;
+}
+
+#foodYes {
+	top: 55px;
+	left: 155px;
+}
+
+#foodNo {
+	top: 72px;
+	left: 130px;
+}
 
 .formField {
     position: relative;
@@ -89,6 +111,10 @@ body {
 	position: relative;
 }
 
+#hide {
+	display: none;
+}
+
 #smokeYes {
 	top: 40px;
 	left: 155px;
@@ -99,44 +125,16 @@ body {
 	left: 130px;
 }
 
-#drinkYes {
-	top: 68px;
-	left: 125px;
-}
-
-#drinkNo {
-	top: 83px;
-	left: 100px;
-}
-
-#foodYes {
-	top: 55px;
-	left: 155px;
-}
-
-#foodNo {
-	top: 72px;
-	left: 130px;
-}
-
 /* Wrappers and Header Stuff */
-#wrapper {
-    background-color:#FFFFFF;
+
+#content {
     width:80%;
     min-width:900px;
     padding:20px;
+    padding-bottom:6px;
     margin-left:auto;
     margin-right:auto;
-    overflow: auto;
-}
-
-#wrapper a {
-    color:black;
-    font-weight:bold;
-}
-
-#wrapper h1 {
-    margin-top:0px;
+    margin-top:-35px;
 }
 
 #header {
@@ -167,17 +165,31 @@ body {
 	text-decoration:none;
 }
 
-#content {
+#wrapper {
+    background-color:#FFFFFF;
     width:80%;
     min-width:900px;
     padding:20px;
-    padding-bottom:6px;
     margin-left:auto;
     margin-right:auto;
-    margin-top:-35px;
+    overflow: auto;
+}
+
+#wrapper a {
+    color:black;
+    font-weight:bold;
+}
+
+#wrapper h1 {
+    margin-top:0px;
 }
 
 /***Ride search results */
+
+.destination, .origin {
+    font-size: 200%;
+}
+	
 .ride {
     border: 1px solid #000;
     padding: 1em 1em 1em 1em;
@@ -202,10 +214,6 @@ body {
     width:10%
 
 }
-
-.origin, .destination {
-    font-size: 200%;
-    }
     
 .time {
     padding-left:2em;
