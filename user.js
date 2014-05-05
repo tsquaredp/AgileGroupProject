@@ -71,18 +71,7 @@ User.prototype.udpateUser = function(id){
         });
   
 };//end UpdateUser
-/* Roles in Parse not figured out yet
-User.prototype.createRole = function(id){
-     Parse.Cloud.run('createRole',{userId:id},{
-        success: function(status){
-            alert(status);
-        },
-        error: function(error){
-            console.log(error);
-        }
-    });
-};
-*/
+
 /*
 ** Logs this.User in
 */
@@ -216,8 +205,12 @@ User.prototype.getUserFromParse = function(id){
         //user.populateEditUserForm();//call method that populates form
         });
 
-};
+};//end getUserFromParse
 
+/* 
+**For setting Parse Roles - not working 
+**TODO
+*/
 User.prototype.setRole = function(id, role){
         Parse.Cloud.run('modifyUser', {id:id, role:role},  {
             success: function(status) {
@@ -229,49 +222,5 @@ User.prototype.setRole = function(id, role){
             }
         });
 
-};
+};//end SetRole
 
-
-//TODO - not working yet
-User.prototype.createRole = function() {
-      var roleACL = new Parse.ACL();
-      roleACL.setWriteAccess(Parse.User.current(), true);
-      roleACL.setPublicReadAccess(true);
-      this.User.setACL(roleACL);
-      /*
-      var role = new Parse.Role("Administrator", roleACL);
-      role.getUsers().add(Parse.User.current());
-
-      
-      role.save(null, {
-          success: function(saveObject) {
-              // The object was saved successfully.
-              alert('role creation done');
-              updateRoleACL(saveObject);
-           },
-           error: function(saveObject, error) {
-              // The save failed.
-              window.alert("Failed creating role with error: " + error.code + ":"+ error.message);
-              //assignRoles();
-           }
-      });
-      */
-    };
-//TODO - not working yet
-User.prototype.updateRoleACL = function(role) {
-      var roleACL = role.getACL();
-      roleACL.setWriteAccess(Parse.User.current(), false);
-      roleACL.setRoleWriteAccess(role,true); 
-      role.save(null, {
-          success: function(saveObject) {
-              // The object was saved successfully.
-              alert('role acl updated');
-              getUser(); 
-           },
-           error: function(saveObject, error) {
-              // The save failed.
-              window.alert("Failed updating role with error: " + error.code + ":"+ error.message);
-           }        
-      })
-    };
-    
