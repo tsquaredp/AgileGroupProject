@@ -223,4 +223,3 @@ User.prototype.setRole = function(id, role){
         });
 
 };//end SetRole
-
