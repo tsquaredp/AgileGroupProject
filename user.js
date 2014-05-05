@@ -81,8 +81,10 @@ User.prototype.login = function(urlParam){
             $.cookie("session",user.id);
             var fullName = user.get("firstName")+" "+user.get("lastName");
             $.cookie("fullName", fullName);
+            $.cookie("role", user.get('role'));
+            
             // Do stuff after successful login.
-            alert("success");
+            alert("Success!");
             if (urlParam == ""){
                 window.location.replace("search.html");
             }else{

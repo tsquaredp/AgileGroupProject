@@ -27,6 +27,24 @@
     <!-- Google Maps -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJsHciAAws-EWj1LSL2UqO287q2mLVoE&sensor=false">
     </script>
+    <script>
+    function getId(){	
+        var query = window.location.search;
+
+        //removes ? from query, leaving only id
+        if (query.substring(0, 1) == '?') {
+                query = query.substring(1);
+        }
+        return query;
+    };
+        
+    // get value of the session cookies
+    var varSession = $.cookie('role');
+    console.log(varSession);
+    if (varSession != 'admin') {
+        window.location.replace("login.html?"+getId());
+    }
+    </script>
 
   </head>
 
