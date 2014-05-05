@@ -78,9 +78,6 @@
             <div class="formField">
                 <a href="admin.html"><input type="button" id="cancel" value="Cancel"></a>
             </div>
-            <div class="formField">
-                <input type="button" id="test" value="Make Admin">
-            </div>
         </section>
         
 	</div>	
@@ -101,12 +98,7 @@
             userman = new User($("#user").val(),'',$("#email").val(),$("#fName").val(),$("#lName").val(),$("#age").val());
             userman.udpateUser(query);
         });
-        $("#test").click(function(){
-            user = new User();
-            user.setRole(query, "admin");
-        });
-        
-        
+
     </script>
     <script> // include header
         $(function(){
