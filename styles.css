@@ -72,7 +72,7 @@ body {
 .form{
     width: 22em;
 }
-.form .formField  label{
+.form .formField  label, .form .formField  p{
 
     float:left;
     clear:both;
