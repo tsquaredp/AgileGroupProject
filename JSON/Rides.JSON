@@ -1,0 +1,115 @@
+var rides = [
+	{
+	"objectId": "kAP6Le0Nbc",
+	"origin": "TENNESEE",
+	"destination": "TEXAS",
+	"seatsAvailable": "2",
+	"price": "120"
+	},
+	{
+	"objectId": "eJDnpXGecr",
+	"origin": "Eau Claire",
+	"destination": "Denver",
+	"seatsAvailable": "3",
+	"price": "50"
+	},
+	{
+	"objectId": "SWHg9HZgtT",
+	"origin": "EAU CLAIRE",
+	"destination": "EAU CLAIRE",
+	"seatsAvailable": "3",
+	"price": "4"
+	},
+	{
+	"objectId": "K2YAREyEcx",
+	"origin": "EAU CLAIRE",
+	"destination": "ALTOONA",
+	"seatsAvailable": "3",
+	"price": "3"
+	},
+	{
+	"objectId": "mEbGGTjvkr",
+	"origin": "EAU CLAIRE",
+	"destination": "Altoona",
+	"seatsAvailable": "3",
+	"price": "2"
+	},
+	{
+	"objectId": "B73Fq70dRe",
+	"origin": "Boyceville, WI",
+	"destination": "Disneyland, FL",
+	"seatsAvailable": "4",
+	"price": "150"
+	},
+	{
+	"objectId": "r1dU7xMjpK",
+	"origin": "Chippewa Falls",
+	"destination": "Eau Claire",
+	"seatsAvailable": "7",
+	"price": "4"
+	},
+	{
+	"objectId": "RKTLSydHCY",
+	"origin": "Eau Claire",
+	"destination": "Quebec",
+	"seatsAvailable": "4",
+	"price": "20"
+	},
+	{
+	"objectId": "j6nb04JZMP",
+	"origin": "Eau Claire",
+	"destination": "Quebec",
+	"seatsAvailable": "3",
+	"price": "20"
+	},
+	{
+	"objectId": "1S7n5ybNfb",
+	"origin": "Eau Claire",
+	"destination": "Duluth",
+	"seatsAvailable": "1",
+	"price": "5"
+	},
+	{
+	"objectId": "VrUW17pD1D",
+	"origin": "Tempe, AZ",
+	"destination": "New York, NY",
+	"seatsAvailable": "2",
+	"price": "125"
+	},
+	{
+	"objectId": "yt45KB7VJl",
+	"origin": "Eau Claire, WI",
+	"destination": "Milwaukee, WI",
+	"seatsAvailable": "4",
+	"price": "15"
+	},
+	{
+	"objectId": "3yZNMnZAd9",
+	"origin": "Strum",
+	"destination": "Eau Claire",
+	"seatsAvailable": "5",
+	"price": "4"
+	},
+	{
+	"objectId": "AQ8qOw6Smb",
+	"origin": "Eau Claire, WI",
+	"destination": "Altoona, WI",
+	"seatsAvailable": "3",
+	"price": "2"
+	},
+	{
+	"objectId": "7YI8Tya9gZ",
+	"origin": "Chicago, IL",
+	"destination": "Chippewa Falls, WI",
+	"seatsAvailable": "4",
+	"price": "12"
+	}
+];
+	
+	
+	
+	
+	
+	
+	
+	
