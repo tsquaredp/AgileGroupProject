@@ -21,6 +21,9 @@
     <!--User-->
     <script src="user.js"></script>
     
+    <!--Role-->
+    <script src="role.js"></script>
+    
     <!-- Google Maps -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJsHciAAws-EWj1LSL2UqO287q2mLVoE&sensor=false">
     </script>
@@ -60,14 +63,23 @@
             <div class="formField">
                 <label for="true">Is Active: </label>
                 <input type="checkbox" name="isActive" id="isActive" value="true"></option>
-
             </div>
             <div class="formField">
-
+                <label for="admin">Admin:</label>
+                <input type="radio" name="role" id="admin" value="admin">
+                <label for="user">User: </label>
+                <input type="radio" name="role" id="userButton" value="user">
+            </div>
+            
+            <!--buttons-->
+            <div class="formField">
                 <input type="button" id="updateUser" value="Update">
             </div>
             <div class="formField">
                 <a href="admin.html"><input type="button" id="cancel" value="Cancel"></a>
+            </div>
+            <div class="formField">
+                <input type="button" id="test" value="Make Admin">
             </div>
         </section>
         
@@ -88,6 +100,10 @@
         $("#updateUser").click(function(){
             userman = new User($("#user").val(),'',$("#email").val(),$("#fName").val(),$("#lName").val(),$("#age").val());
             userman.udpateUser(query);
+        });
+        $("#test").click(function(){
+            user = new User();
+            user.setRole(query, "admin");
         });
         
         
