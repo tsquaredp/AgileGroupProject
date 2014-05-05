@@ -72,18 +72,18 @@ body {
 .form{
     width: 22em;
 }
+.form .formField  label{
 
-.form .formField  input, .form .formField  select, .form .formField  small{
+    float:left;
+    clear:both;
+}
+.form .formField  input, .form .formField  select, .form .formField  small, .form .formField a #cancel{
     float:right;
 	padding-left: 5px;
     width: 16em;
 }
 
-.form .formField  label, .form .formField  a{
 
-    float:left;
-    clear:both;
-}
 
 .formField span {
 	position: relative;
