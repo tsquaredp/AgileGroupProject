@@ -12,6 +12,10 @@
     
     <!-- jQuery library and related functions -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    
+    <!-- parse library -->
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+    
     <script> // include header
     $(function(){
       $("#header").load("header.html"); 
@@ -20,8 +24,7 @@
     <script type="text/javascript" src="jquery.cookie.js"></script>
     <script src="helperFunctions.js"></script>
     
-    <!-- parse library -->
-    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+
     
     <!-- encapsulates objects and related functions -->
     <script src="ride.js"></script>
@@ -44,6 +47,7 @@
         
         // get value of the session cookies
         var varSession = $.cookie('session');
+
         //console.log(varSession);
         if (varSession == null) {
             //console.log(varSession);
