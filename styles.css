@@ -210,3 +210,9 @@ body {
 .time {
     padding-left:2em;
     }
+    
+/* Admin */
+.userTable, td, th, tr{
+    border: 1px solid black;
+    padding:3px;
+}
