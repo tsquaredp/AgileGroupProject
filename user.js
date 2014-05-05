@@ -8,7 +8,7 @@ var User = function(userName, password, email, firstName, lastName, age){
     this.lastName = lastName;
 	this.age = age;
     this.isActive = '';
-
+    this.role = 'user';
 };
 
 /*
@@ -57,8 +57,10 @@ User.prototype.udpateUser = function(id){
         var phone =  $("#phone").val();
         var isActive = $("#isActive").attr('checked');
         var active = (isActive == 'checked')?true:false;
-        
-        Parse.Cloud.run('modifyUser', { id: id, firstName: firstName, lastName:lastName, username:username, email:email, age:age, isActive:active},  {
+        var roleRadioButtons = $('input[name=role]');
+        var role = roleRadioButtons.filter(':checked').val();
+
+        Parse.Cloud.run('modifyUser', { id: id, firstName: firstName, lastName:lastName, username:username, email:email, age:age, isActive:active, role:role},  {
           success: function(status) {
             alert(status);
             window.location.href ="admin.html";
@@ -69,7 +71,7 @@ User.prototype.udpateUser = function(id){
         });
   
 };//end UpdateUser
-
+/* Roles in Parse not figured out yet
 User.prototype.createRole = function(id){
      Parse.Cloud.run('createRole',{userId:id},{
         success: function(status){
@@ -80,7 +82,7 @@ User.prototype.createRole = function(id){
         }
     });
 };
-
+*/
 /*
 ** Logs this.User in
 */
@@ -120,6 +122,7 @@ User.prototype.findUser = function(id){
         user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"), object.get("age"));
         user.id = object.id; //assign id to User object
         user.isActive = object.get("isActive");
+        user.role = object.get("role");
 
         user.populateEditUserForm();//call method that populates form
         });
@@ -141,8 +144,14 @@ User.prototype.populateEditUserForm = function(){
     if(this.isActive == true){
         $("#isActive").prop('checked',true);
     } 
-    //$('input:radio[name=isActive]').prop('checked', true); 
-    //$('input:radio[name=isActive]').prop('unchecked', false); 
+
+    if (this.role == 'admin'){
+        $("#admin").prop('checked',true);
+    }else if(this.role == 'user'){
+        $("#userButton").prop('checked',true);
+    }
+    
+    console.log(this.role);
 };//end populateEditUserForm
 
 /*
@@ -193,7 +202,6 @@ User.prototype.getUsers = function(){
 };//end getUsers
 
 User.prototype.getUserFromParse = function(id){
-    Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
 
     var query = new Parse.Query(Parse.User);
     query.equalTo("objectId", id);
@@ -206,6 +214,19 @@ User.prototype.getUserFromParse = function(id){
         
         return user;
         //user.populateEditUserForm();//call method that populates form
+        });
+
+};
+
+User.prototype.setRole = function(id, role){
+        Parse.Cloud.run('modifyUser', {id:id, role:role},  {
+            success: function(status) {
+                alert(status);
+                window.location.href ="admin.html";
+            },
+            error: function(error) {
+                console.log(error);
+            }
         });
 
 };
