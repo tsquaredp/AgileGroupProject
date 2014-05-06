@@ -56,7 +56,6 @@ UserMsg.prototype.sendNewMessageRequest = function (){
 
 UserMsg.prototype.displayMessagesInInbox = function () {
 	
-	/*
 	// here, we want to get all the messages whose RecipentObjectId = the logged in user.
 	var newMessages = Parse.Object.extend("UserMsg");
 	var query = new Parse.Query(newMessages);
@@ -68,7 +67,7 @@ UserMsg.prototype.displayMessagesInInbox = function () {
 			// print the messages using a loop
 			for (var i = 0; i < results.length; i++) {
 				var object = results[i];
-				alert("Hey");
+				alert("Message Loaded");
 				
 				// find the User's name that matches the SenderObjectId
 				var user = new Parse.Object.extend("User");
@@ -85,7 +84,7 @@ UserMsg.prototype.displayMessagesInInbox = function () {
 							success: function(rideResult) {
 								// got the Ride object whose name matches the id!
 								// *finally* time to output the message...
-								$('#wrapper').append("<b>"+userResult.get("firstName")+" "+userResult.get("lastName")+"</b> wants to join the ride To: <b>"+rideResult.get("origin")+" - From: "+rideResult.get("destination")+".</b> <a href=inbox.html>Accept</a> <a href=inbox.html?remove="+object.id+">Delete</a> <br>");
+								$('#wrapper').append("<b>"+userResult.get("firstName")+" "+userResult.get("lastName")+"</b> wants to join the ride <b>To: "+rideResult.get("origin")+" - From: "+rideResult.get("destination")+".</b> <a href=inbox.html>Accept</a> <a href=inbox.html?remove="+object.id+">Delete</a> <br>");
 							},
 							error: function (object, error) {
 								alert("There was an error retrieving the ride object");
@@ -103,8 +102,8 @@ UserMsg.prototype.displayMessagesInInbox = function () {
 			alert("Error: " + error.code + " " + error.message);
 		}
 	});
-	*/
 	
+	/* OLD CODE
 	// let's try this again...
 	// here, we want to get all the messages whose RecipentObjectId = the logged in user.
 	var newMessages = Parse.Object.extend("UserMsg");
@@ -132,4 +131,5 @@ UserMsg.prototype.displayMessagesInInbox = function () {
 			$('#wrapper').append(" wants to join the ride <b>To: "+rideResult.get("origin")+" - From: "+rideResult.get("destination")+".</b> <a href=inbox.html>Accept</a> <a href=inbox.html?remove="+object.id+">Delete</a> <br>");
 		});
 	//}
+	*/
 };
