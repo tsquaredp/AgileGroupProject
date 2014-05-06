@@ -36,17 +36,16 @@
                     <label for="email">Email: </label>
                     <input type="text" id="email" placeholder="Your email address here." required>
                 </div>
+				<div class="formField" style="display:none">
+					<label for="botDetector">Fill: </label>
+					<input type="text" id="botDetector">
+				</div>
             </form>
             
             <div class="formField">
                 <label for="createUser">Create: </label>
                 <input type="button" id="createUser" value="Click">
             </div>
-			
-			<div class="formField">
-				<label for="botDetector" id="hide">Fill: </label>
-				<input type="hidden" id="hide">
-			</div>
         </section>
     </div>
 <script type="text/javascript">
@@ -54,9 +53,9 @@
 ready = false;
 
 $("#createUser").click(function(){
-
+	
 	validate();
-
+	
     //user stuff
     var userName = $("#user").val();
     var password = $("#password").val();
@@ -74,6 +73,12 @@ $("#createUser").click(function(){
 });
 
 function validate() {
+	if ($('#botDetector').val()) {
+		alert("Cannot create user");
+		window.location.href = "search.html";
+		return false;
+	}
+
 	if (document.myForm.fName.value == "") {
 		alert("A valid first name is needed");
 		document.myForm.fName.focus();
@@ -137,7 +142,7 @@ function validate() {
 		document.myForm.email.focus();
 		return false;
 	}
-	re= /^[a-zA-Z]+@student\.cvtc\.edu$/;
+	/*re= /^[a-zA-Z]+@student\.cvtc\.edu$/;
 	re2= /^[a-zA-Z]+@cvtc\.edu$/;
 	if (!re.test(document.myForm.email.value) || !re2.test(document.myForm.email.value)) {
 		alert("test1");
