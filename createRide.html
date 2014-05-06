@@ -73,24 +73,6 @@ $("#createRides").click(function(){
 	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
 	ready = false;
 	<!-- validate(); -->
-	ready = true;
-    var newRide =  Ride;
-    newRide.origin = $("#origin").val();
-    newRide.destination  = $("#destination").val();
-	newRide.seatsAvailable = parseInt($("#seatsAvailable").val());
-    newRide.date = $("#date").val();
-    newRide.price = parseFloat($("#price").val());
-    newRide.time = $("#time").val();
-	newRide.smoke = $("#smoke").val();
-    newRide.food = $("#food").val();
-	newRide.drink = $("#drink").val();
-	
-	if (ready) {
-		newRide.insertRide(); 
-		window.location.href="search.html";
-	}
-	
-	
 	
 	function validate() {
 	
@@ -179,6 +161,27 @@ $("#createRides").click(function(){
 	
 	function radios() {
 		return ($('input:radio:checked').length = 3);
+	}
+    
+    
+    ready = true;
+    
+    origin = $("#origin").val();
+    destination  = $("#destination").val();
+	seatsAvailable = parseInt($("#seatsAvailable").val());
+    date = $("#date").val();
+    price = parseFloat($("#price").val());
+    time = $("#time").val();
+	smoke = $("#smoke").val();
+    food = $("#food").val();
+	drink = $("#drink").val();
+    
+    var newRide = new Ride(origin, destination, seatsAvailable, date, price, smoke, drink, food);
+    newRide.time = time;
+	
+	if (ready) {
+		newRide.insertRide(); 
+		//window.location.href="search.html";
 	}
 
 });

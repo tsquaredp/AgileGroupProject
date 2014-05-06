@@ -17,7 +17,7 @@ Ride.prototype.insertRide = function (){
 	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
 	var ParseRide = Parse.Object.extend("Ride");//create subclass of Parse.Object
 	var ride = new ParseRide();//new instance of that object (Ride) callled ride
-	 
+	 console.log(this.origin);
 	ride.set("origin",this.origin);
 	ride.set("destination",this.destination);
 	ride.set("seatsAvailable", this.seatsAvailable);
