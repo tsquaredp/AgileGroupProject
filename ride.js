@@ -13,7 +13,7 @@ var Ride =function(origin, destination, seatsAvailable, date, price, smoke, drin
 };
 
     
-Ride.prototype.insertRide:function (){
+Ride.prototype.insertRide = function (){
 	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
 	var ParseRide = Parse.Object.extend("Ride");//create subclass of Parse.Object
 	var ride = new ParseRide();//new instance of that object (Ride) callled ride
@@ -39,7 +39,7 @@ Ride.prototype.insertRide:function (){
 	});
 };
    
-Ride.prototype.getRide: function(id){
+Ride.prototype.getRide =function(id){
 	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
 	var Ride = Parse.Object.extend("Ride");
 	var query = new Parse.Query(Ride);
