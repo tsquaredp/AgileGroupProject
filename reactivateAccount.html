@@ -51,6 +51,8 @@
         </section>
 
     </div>
+    <script src="sendEmail.js">
+    </script>
     <script>
         var url = getUrlParameter();
         $("#userId").val(url);
@@ -62,12 +64,15 @@
         var fName = $("#fName").val();
         var lName = $("#lName").val();
         var email = $("#email").val();
-        var user = $("#user").val();
+        var username = $("#user").val();
         
         $("#reactivateAccount").click(function(){
-            user.sendEmail(url, fName, lName, email, user);
+            user.sendEmail(url, fName, lName, email, username);
         });
+        
+        
     </script>
+    
     
     
   </body>

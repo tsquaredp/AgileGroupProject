@@ -258,9 +258,9 @@ User.prototype.getUsers = function(){
         });        
 };//end getUsers
 
-User.prototype.sendEmail = function(id, firstName, lastName, email, user){
+User.prototype.sendEmail = function(id, firstName, lastName, email, username){
 
-    Parse.Cloud.run('sendEmail', {id:id, firstName:firstName, lastName:lastName, email:email, user:user},  {
+    Parse.Cloud.run('sendEmail', {id:id, firstName:firstName, lastName:lastName, email:email, username:username},  {
           success: function(status) {
             console.log(status);
             alert(status);
