@@ -18,6 +18,23 @@ User.prototype.fullName = function(){
     return(this.firstName+" "+this.lastName);
 };//end fullname
 
+User.prototype.userEmail = function(id) {
+	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+	var user = Parse.Object.extend("User");
+	var query = new Parse.Query(user);
+	query.get(id, {
+	  success: function(user) {
+		email = result.get("email");
+		fName = result.get("firstName");
+	  },
+	  error: function(object, error) {
+		// The object was not retrieved successfully.
+		// error is a Parse.Error with an error code and description.
+		alert("Error retrieving user.");
+	  }
+	});
+}
+
 /*
 ** Creates user 
 */
@@ -50,7 +67,7 @@ User.prototype.createUser = function(){
 /*
 ** Updates user - uses Cloud Code
 */
-User.prototype.udpateUser = function(id){
+User.prototype.updateUser = function(id){
     var firstName =  $("#fName").val();
     var lastName =  $("#lName").val();
     var username =  $("#user").val();
@@ -71,7 +88,7 @@ User.prototype.udpateUser = function(id){
 /*
 **Updates User Status - uses main.js cloud code
 */
-User.prototype.udpateStatus = function(id){
+User.prototype.updateStatus = function(id){
     var username =  $("#user").val();
     var active = $("#isActive").attr('checked');
     var isActive = (active == 'checked')?true:false;
@@ -89,7 +106,7 @@ User.prototype.udpateStatus = function(id){
 /*
 **Updates User Role - uses main.js cloud code
 */
-User.prototype.udpateRole = function(id){
+User.prototype.updateRole = function(id){
     var username =  $("#user").val();
     var roleRadioButtons = $('input[name=role]');
     var role = roleRadioButtons.filter(':checked').val();
