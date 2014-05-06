@@ -32,6 +32,7 @@ Ride.prototype.insertRide = function (){
 	ride.save(null , {
 		success: function(ride){
 			alert("ride "+ride.id+" saved.");
+            window.location.href="search.html";
 		},
 		error: function(ride, error){
 			alert("Failed to create "+ride.id+" because "+error.description);
