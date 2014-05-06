@@ -59,9 +59,11 @@ User.prototype.udpateUser = function(id){
     Parse.Cloud.run('modifyUser', { username: username, firstName:firstName, lastName:lastName, email:email, age:age }, {
       success: function(status) {
         // the user was updated successfully
+        window.location.replace("admin.html");
       },
       error: function(error) {
-        console.log(error);
+        alert(error);
+        window.location.replace("admin.html");
       }
     });
 };//end updateUser
@@ -76,10 +78,11 @@ User.prototype.udpateStatus = function(id){
     console.log(isActive);
     Parse.Cloud.run('modifyUserStatus', {  isActive:isActive, username:username }, {
       success: function(status) {
-        console.log(status);
+        window.location.replace("admin.html");
       },
       error: function(error) {
-        console.log(error);
+        alert(error);
+        window.location.replace("admin.html");
       }
     });
 };
@@ -94,10 +97,11 @@ User.prototype.udpateRole = function(id){
     console.log(role);
     Parse.Cloud.run('modifyUserRole', { role:role, username:username }, {
       success: function(status) {
-        console.log(status);
+        window.location.replace("admin.html");
       },
       error: function(error) {
-        console.log(error);
+        alert(error);
+        window.location.replace("admin.html");
       }
     });
 };
