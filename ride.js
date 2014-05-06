@@ -5,7 +5,7 @@ var Ride =function(origin, destination, seatsAvailable, date, price, smoke, drin
     this.destination = destination;
 	this.seatsAvailable = seatsAvailable;
     this.date = date;
-    this.time = time;
+    this.time = '';
     this.price = price;
 	this.smoke = smoke;
 	this.drink = drink;
@@ -62,4 +62,31 @@ Ride.prototype.getRide =function(id){
 	  }
 	});
 };
-    
+
+
+Ride.prototype.displayMatchingRides = function(query){
+    var data = query.split(','); 
+    for (i = 0; (i < data.length); i++) {
+        data[i] = unescape(data[i]);
+        var Ride = Parse.Object.extend("Ride");
+        var query = new Parse.Query(Ride);
+        var info = query.get(data[i], {
+            success: function(info){
+                $('body').append('\
+                    <section class="ride">\
+                        <div class="route">\
+                            <a href="ride.html?'+info.id+'" class="routeLink">\
+                                <span class="origin">'+info.get("origin")+'-'+info.get("destination")+'</span>\
+                                <p class="time">'+"Departs "+info.get("time")+'</p>\
+                            </a>\
+                        </div>\
+                        <div class="seatCost">\
+                            Per Seat:\
+                            <p class="price">$'+info.get("price")+'</p>\
+                        </div>\
+                    </section>');
+                    $('.date').text("Rides for "+info.get("date"));
+                } //end query success function
+        });
+    }
+};
