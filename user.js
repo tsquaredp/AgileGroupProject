@@ -31,6 +31,8 @@ User.prototype.createUser = function(){
     user.set("firstName", this.firstName);
     user.set("lastName", this.lastName);
 	user.set("age", this.age);
+    user.set("isActive", true);
+    user.set("role", 'user');
      
     user.signUp(null, {
       success: function(user) {
@@ -49,43 +51,81 @@ User.prototype.createUser = function(){
 ** Updates user - uses Cloud Code
 */
 User.prototype.udpateUser = function(id){
-        var firstName =  $("#fName").val();
-        var lastName =  $("#lName").val();
-        var username =  $("#user").val();
-        var email =  $("#email").val();
-        var age =  Number($("#age").val());
-        var phone =  $("#phone").val();
-        var isActive = $("#isActive").attr('checked');
-        var active = (isActive == 'checked')?true:false;
-        var roleRadioButtons = $('input[name=role]');
-        var role = roleRadioButtons.filter(':checked').val();
+    var firstName =  $("#fName").val();
+    var lastName =  $("#lName").val();
+    var username =  $("#user").val();
+    var email =  $("#email").val();
+    var age =  Number($("#age").val());
+    Parse.Cloud.run('modifyUser', { username: username, firstName:firstName, lastName:lastName, email:email, age:age }, {
+      success: function(status) {
+        // the user was updated successfully
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+};//end updateUser
 
-        Parse.Cloud.run('modifyUser', { id: id, firstName: firstName, lastName:lastName, username:username, email:email, age:age, isActive:active, role:role},  {
-          success: function(status) {
-            alert(status);
-            window.location.href ="admin.html";
-          },
-          error: function(error) {
-            console.log(error);
-          }
-        });
-  
-};//end UpdateUser
+/*
+**Updates User Status - uses main.js cloud code
+*/
+User.prototype.udpateStatus = function(id){
+    var username =  $("#user").val();
+    var active = $("#isActive").attr('checked');
+    var isActive = (active == 'checked')?true:false;
+    console.log(isActive);
+    Parse.Cloud.run('modifyUserStatus', {  isActive:isActive, username:username }, {
+      success: function(status) {
+        console.log(status);
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+};
+/*
+**Updates User Role - uses main.js cloud code
+*/
+User.prototype.udpateRole = function(id){
+    var username =  $("#user").val();
+    var roleRadioButtons = $('input[name=role]');
+    var role = roleRadioButtons.filter(':checked').val();
+    
+    console.log(role);
+    Parse.Cloud.run('modifyUserRole', { role:role, username:username }, {
+      success: function(status) {
+        console.log(status);
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+};
 
 /*
 ** Logs this.User in
 */
 User.prototype.login = function(urlParam){
+    //prevent default
+    
+
     Parse.User.logIn(this.userName, this.password, {
         success: function(user) {
             $.cookie("session",user.id);
             var fullName = user.get("firstName")+" "+user.get("lastName");
             $.cookie("fullName", fullName);
             $.cookie("role", user.get('role'));
-            
+
             // Do stuff after successful login.
-            alert("Success!");
-            if (urlParam == ""){
+            //user not active. logout and redirect
+            if(!user.get("isActive")){
+                Parse.User.logOut();
+                document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 GMT"; 
+                document.cookie = "fullName=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 GMT";  
+                
+                window.location.replace("reactivateAccount.html?"+user.id);
+            }else if (urlParam == ""){
                 window.location.replace("search.html");
             }else{
                 window.location.replace("ride.html?"+urlParam);
@@ -97,6 +137,10 @@ User.prototype.login = function(urlParam){
         }
     });
 };//end login
+
+User.prototype.logOut = function(urlParam){
+    Parse.User.logOut();
+};
 
 /*
 ** Queries User in Parse for match by id
@@ -132,6 +176,7 @@ User.prototype.populateEditUserForm = function(){
 	$("#age").val(this.age);
     $("#email").val(this.email);
     $("#isActive").val(this.isActive);
+   // $("#role").val(this.role);
     if(this.isActive == true){
         $("#isActive").prop('checked',true);
     } 
@@ -142,7 +187,7 @@ User.prototype.populateEditUserForm = function(){
         $("#userButton").prop('checked',true);
     }
     
-    console.log(this.role);
+ 
 };//end populateEditUserForm
 
 /*
@@ -192,36 +237,18 @@ User.prototype.getUsers = function(){
         });        
 };//end getUsers
 
-User.prototype.getUserFromParse = function(id){
+User.prototype.sendEmail = function(id, firstName, lastName, email, user){
 
-    var query = new Parse.Query(Parse.User);
-    query.equalTo("objectId", id);
-    query.first().then(function(object){
-        // Do something with the returned Parse.Object values
-        //create User object from queried object
-        user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"), object.get("age"));
-        user.id = object.id; //assign id to User object
-        user.isActive = object.get("isActive");
-        
-        return user;
-        //user.populateEditUserForm();//call method that populates form
+    Parse.Cloud.run('sendEmail', {id:id, firstName:firstName, lastName:lastName, email:email, user:user},  {
+          success: function(status) {
+            console.log(status);
+            alert(status);
+            
+          },
+          error: function(error) {
+            console.log(error);
+            alert("L");
+          }
         });
-
-};//end getUserFromParse
-
-/* 
-**For setting Parse Roles - not working 
-**TODO
-*/
-User.prototype.setRole = function(id, role){
-        Parse.Cloud.run('modifyUser', {id:id, role:role},  {
-            success: function(status) {
-                alert(status);
-                window.location.href ="admin.html";
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-
-};//end SetRole
+  
+};

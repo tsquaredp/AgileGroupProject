@@ -53,7 +53,7 @@ $("#login").click(function(){
     var password = $("#password").val();
     var urlThing = getUrlParameter();
     
-    user = new User(userName, password,'' ,'' ,'' );
+    user = new User(userName, password,'' ,'' ,'','' );
     
     user.login(urlThing);
 });
