@@ -1,6 +1,6 @@
 Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
                        
-var Ride =function(origin, destination, seatsAvailable, date, price, smoke, drink, food){  
+var Ride =function(origin, destination, seatsAvailable, date, time, price, smoke, drink, food){  
     this.origin = origin;
     this.destination = destination;
 	this.seatsAvailable = seatsAvailable;
@@ -16,7 +16,7 @@ var Ride =function(origin, destination, seatsAvailable, date, price, smoke, drin
 Ride.prototype.insertRide = function (){
 	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
 	var ParseRide = Parse.Object.extend("Ride");//create subclass of Parse.Object
-	var ride = new ParseRide();//new instance of that object (Ride) callled ride
+	var ride = new ParseRide();//new instance of that object (Ride) called ride
 	 
 	ride.set("origin",this.origin);
 	ride.set("destination",this.destination);
@@ -62,4 +62,3 @@ Ride.prototype.getRide =function(id){
 	  }
 	});
 };
-    

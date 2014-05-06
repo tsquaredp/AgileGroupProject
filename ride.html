@@ -15,6 +15,8 @@
     
     <!-- parse library -->
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+	<script type="text/javascript" src="user.js"></script>
+	<script type="text/javascript" src="ride.js"></script>
     
     <script> // include header
     $(function(){
@@ -110,7 +112,7 @@
 		<a href="search.html">Home</a> || <a href="rideSearchResults.html">Search</a> || <a href="ride.html">Ride Details</a>
 	</div>
 		
-	<script>
+<script>
 function getId(){	
 	var query = window.location.search;
 
@@ -141,6 +143,7 @@ function getId(){
 			smoke = result.get("smoke");
 			food = result.get("food");
 			drink = result.get("drink");
+			driver = result.get("driverId");
 			
             values(id, origin, destination, seatsAvailable, time, date, price, smoke, food, drink);//call external 'values()' function to pass out data           
 		   // The object was retrieved successfully.
@@ -253,7 +256,6 @@ $("#sendRideRequest").click(function(){
 	});
 	
 	window.location.href = "search.html";
-
 });
 	</script>
 

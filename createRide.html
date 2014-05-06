@@ -70,11 +70,13 @@
 <script type="text/javascript">
 
 $("#createRides").click(function(){   
-	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+
+Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
 	ready = false;
-	<!-- validate(); -->
-	ready = true;
-    var newRide =  Ride;
+
+	validate();
+
+    var newRide =  new Ride;
     newRide.origin = $("#origin").val();
     newRide.destination  = $("#destination").val();
 	newRide.seatsAvailable = parseInt($("#seatsAvailable").val());
@@ -89,10 +91,11 @@ $("#createRides").click(function(){
 		newRide.insertRide(); 
 		window.location.href="search.html";
 	}
-	
-	
-	
-	function validate() {
+
+
+};
+
+function validate() {
 	
 		if ($("#origin").val() == "") {
 			alert("A valid origin is needed");
@@ -175,12 +178,12 @@ $("#createRides").click(function(){
 			alert("Please select all options");
 			return false;
 		}
-	}
-	
+	};
+
 	function radios() {
 		return ($('input:radio:checked').length = 3);
 	}
-
+	
 });
 
   </script>
