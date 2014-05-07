@@ -105,7 +105,16 @@ body {
     width: 16em;
 }
 
-
+.radioButtonFix{
+    float:left;
+    padding:2em 0 2em 0;
+}
+.radioButtonFix label{
+    padding-right: 3em;
+}
+.radioButtonFix input, .radioButtonFix span{
+  float:right;
+}
 
 .formField span {
 	position: relative;
