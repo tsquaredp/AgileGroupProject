@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Reactive Account Request</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- link calendar resources -->
+    <link rel="stylesheet" type="text/css" href="calendar/tcal.css" />
+    <script type="text/javascript" src="calendar/tcal.js"></script>
+    
+    <!-- jQuery library and related functions -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script> // include header
+    $(function(){
+      $("#header").load("header.html"); 
+    });
+    </script>
+    <!-- parse library -->
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+    <script type="text/javascript" src="jquery.cookie.js"></script>
+	<script src="helperFunctions.js"></script>
+
+	<!-- encapsulates objects and related functions -->
+    <script src="user.js"></script>
+    <script src="userMsg.js"></script>
+
+  </head>
+
+  <body>
+    
+    <div id="header"></div>
+    
+    <div id="wrapper">
+
+        <h1>Reactivate Account Request</h1>
+        <p>Your account is inactive. If you would like to send a reactivation request, please click below.</p>
+        <section class="form">
+			
+				<div class="formField">
+					<label for="searchRides">Send request: </label>
+					<input type="submit" id="reactivateAccount" value="Send">
+                    <input type="hidden" id="userId" name="userId">
+                    <input type="hidden" id="fName" name="fName">
+                    <input type="hidden" id="lName" name="lName">
+                    <input type="hidden" id="email" name="email">
+                    <input type="hidden" id="user" name="user">
+				</div>
+			
+        </section>
+
+    </div>
+    <script src="sendEmail.js">
+    </script>
+    <script>
+        var url = getUrlParameter();
+        $("#userId").val(url);
+        
+        
+        user = new User();
+        user.findUser(url);
+
+        var fName = $("#fName").val();
+        var lName = $("#lName").val();
+        var email = $("#email").val();
+        var username = $("#user").val();
+        
+        $("#reactivateAccount").click(function(){
+            user.sendEmail(url, fName, lName, email, username);
+        });
+        
+        
+    </script>
+    
+    
+    
+  </body>
+  </html>

@@ -12,6 +12,12 @@
     
     <!-- jQuery library and related functions -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    
+    <!-- parse library -->
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+	<script type="text/javascript" src="user.js"></script>
+	<script type="text/javascript" src="ride.js"></script>
+    
     <script> // include header
     $(function(){
       $("#header").load("header.html"); 
@@ -20,8 +26,7 @@
     <script type="text/javascript" src="jquery.cookie.js"></script>
     <script src="helperFunctions.js"></script>
     
-    <!-- parse library -->
-    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+
     
     <!-- encapsulates objects and related functions -->
     <script src="ride.js"></script>
@@ -44,6 +49,7 @@
         
         // get value of the session cookies
         var varSession = $.cookie('session');
+
         //console.log(varSession);
         if (varSession == null) {
             //console.log(varSession);
@@ -106,7 +112,7 @@
 		<a href="search.html">Home</a> || <a href="rideSearchResults.html">Search</a> || <a href="ride.html">Ride Details</a>
 	</div>
 		
-	<script>
+<script>
 function getId(){	
 	var query = window.location.search;
 
@@ -137,6 +143,7 @@ function getId(){
 			smoke = result.get("smoke");
 			food = result.get("food");
 			drink = result.get("drink");
+			driver = result.get("driverId");
 			
             values(id, origin, destination, seatsAvailable, time, date, price, smoke, food, drink);//call external 'values()' function to pass out data           
 		   // The object was retrieved successfully.
@@ -230,6 +237,25 @@ google.maps.event.addDomListener(window, 'load', initialize);
 $("#sendRideRequest").click(function(){ 
     var userMsg = new UserMsg();
     userMsg.sendNewMessageRequest();
+	
+	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+	
+	var Ride = Parse.Object.extend("Ride");
+	var ride = new Ride();
+	
+	var seatsToTake = parseInt($(".gasBox").val());
+	newSeats = Ride.seatsAvailable - seatsToTake;
+	
+
+	
+	ride.save(null, {
+		success: function(ride){
+			ride.set("seatsAvailable", newSeats);
+			ride.save();
+		}
+	});
+	
+	window.location.href = "search.html";
 });
 	</script>
 

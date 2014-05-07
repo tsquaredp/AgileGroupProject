@@ -6,6 +6,8 @@
     <link href="styles.css" rel="stylesheet">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+    <script src="ride.js"></script>
+    <script src="helperFunctions.js"></script>
 
     </head>
 <body>
@@ -15,15 +17,20 @@
 
     
     <script>
-        Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+        //COMMENTED CODE CAN BE DELETED - MOVED INTO ride.js AND helperFunctions.js
+        //Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
         var query = window.location.search;
         // Skip the leading ?, which should always be there, 
         // but be careful anyway
-          
+        /*  
         if (query.substring(0, 1) == '?') {
             query = query.substring(1);
         }
-     
+        */
+        query = getUrlParameter();
+        ride = new Ride();
+        ride.displayMatchingRides(query);
+        /*
         var data = query.split(','); 
             for (i = 0; (i < data.length); i++) {
                 data[i] = unescape(data[i]);
@@ -48,7 +55,7 @@
                         } //end query success function
                 });
             }
-             
+         */    
     </script>
 
 </body>

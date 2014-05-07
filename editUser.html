@@ -21,8 +21,29 @@
     <!--User-->
     <script src="user.js"></script>
     
+    <!--Role-->
+    <script src="role.js"></script>
+    
     <!-- Google Maps -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIJsHciAAws-EWj1LSL2UqO287q2mLVoE&sensor=false">
+    </script>
+    <script>
+    function getId(){	
+        var query = window.location.search;
+
+        //removes ? from query, leaving only id
+        if (query.substring(0, 1) == '?') {
+                query = query.substring(1);
+        }
+        return query;
+    };
+        
+    // get value of the session cookies
+    var varSession = $.cookie('role');
+    console.log(varSession);
+    if (varSession != 'admin') {
+        window.location.replace("login.html?"+getId());
+    }
     </script>
 
   </head>
@@ -43,11 +64,7 @@
             </div>
             <div class="formField">
                 <label for="user">User Name: </label>
-                <input type="text" id="user">
-            </div>
-            <div class="formField">
-                <label for="password">Password: </label>
-                <input type="text" id="password">
+                <input type="text" id="user" disabled="disabled">
             </div>
             <div class="formField">
                 <label for="email">Email: </label>
@@ -57,19 +74,32 @@
                 <label for="age">Age: </label>
                 <input type="text" id="age">
             </div>
-            <div class="formField">
-                <label for="true">Is Active: </label>
-                <input type="checkbox" name="isActive" id="isActive" value="true"></option>
 
-            </div>
+            <!--buttons-->
             <div class="formField">
-
                 <input type="button" id="updateUser" value="Update">
             </div>
             <div class="formField">
                 <a href="admin.html"><input type="button" id="cancel" value="Cancel"></a>
             </div>
         </section>
+        
+        <section class="form">            
+            <div class="formField">
+                <label for="true">Is Active: </label>
+                <input type="checkbox" name="isActive" id="isActive" value="true"></option>
+                <input type="button" id="updateStatus" value="Update Status">
+            </div>
+            <div class="formField">
+                <label for="admin">Admin:</label>
+                <input type="radio" name="role" id="admin" value="admin">
+                <label for="user">User: </label>
+                <input type="radio" name="role" id="userButton" value="user">
+                <input type="button" id="updateRole" value="Update Role">
+            </div>
+
+        </section>
+
         
 	</div>	
 	<script>
@@ -86,11 +116,18 @@
         
         //button listeners
         $("#updateUser").click(function(){
-            userman = new User($("#user").val(),'',$("#email").val(),$("#fName").val(),$("#lName").val(),$("#age").val());
-            userman.udpateUser(query);
+            userman = new User();
+            userman.updateUser(query);
         });
-        
-        
+        $("#updateStatus").click(function(){
+            userman = new User();
+            userman.updateStatus(query);
+        });
+        $("#updateRole").click(function(){
+            userman = new User();
+            userman.updateRole(query);
+        });
+
     </script>
     <script> // include header
         $(function(){

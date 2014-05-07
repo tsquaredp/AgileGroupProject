@@ -8,6 +8,8 @@
     
     <!-- jQuery library and related functions -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <!-- parse library -->
+    <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
     <script> // include header
     $(function(){
       $("#header").load("header.html"); 
@@ -20,7 +22,8 @@
   
     <script>
     document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 GMT"; 
-    document.cookie = "fullName=; expires=Thu, 01 Jan 1970 00:00:00 GMT"; 
+    document.cookie = "fullName=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 GMT";     
     </script>
     
     <div id="header"></div>
@@ -28,7 +31,11 @@
     <div id="wrapper">
         Log Out Successful. Click a link on the navigation pane to continue.
     </div>
-
+    <script type="text/javascript" src="user.js"></script>
+    <script>
+        var user = new User();
+        user.logOut();
+    </script>
   </body>
   
 </html>

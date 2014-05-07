@@ -12,72 +12,177 @@
   <script src="ride.js"></script>
 </head>
 <body>
-    <section>
-        <div class="formField">
-            <label for="origin">Origin: </label>
-            <input type="text" id="origin">
-        </div>
-        <div class="formField">
-            <label for="destination">Destination: </label>
-            <input type="text" id="destination">
-        </div>
-		<div class="formField">
-            <label for="seatsAvailable">Seats Available: </label>
-            <input type="text" id="seatsAvailable">
-        </div>
-        <div class="formField">
-            <label for="date">Date: </label>
-            <input type="text" id="date" name="date" class="tcal" value="" size="21">
-        </div>
-        <div class="formField">
-            <label for="time">Time: </label>
-            <input type="text" id="time">
-        </div>
-        <div class="formField">
-            <label for="price">Price: </label>
-            <input type="text" id="price">
-        </div>
-		<div class="formField">
-            <label for="smoke">Smoking?</label>
-            <input type="radio" name="smoke" id="smoke" value="Yes">Yes
-			<input type="radio" name="smoke" id="smoke" value="No">No
-        </div>
-		<div class="formField">
-            <label for="food">Food?</label>
-            <input type="radio" name="food" id="food" value="Yes">Yes
-			<input type="radio" name="food" id="food" value="No">No
-        </div>
-		<div class="formField">
-            <label for="drink">Drinks?</label>
-            <input type="radio" name="drink" id="drink" value="Yes">Yes
-			<input type="radio" name="drink" id="drink" value="No">No
-        </div>
-        <div class="formField">
-            <label for="createRides">Create Rides: </label>
-            <input type="button" id="createRides" value="Click">
-        </div>
+    <section class="form">
+		<form class="myForm">
+			<div class="formField" id="createRide">
+				<label for="origin">Origin: </label>
+				<input type="text" id="origin" placeholder="Follow this format: Eau Claire, WI">
+
+				<br/>
+
+				<label for="destination">Destination:</label>
+				<input type="text" id="destination" placeholder="Follow this format: Altoona, WI">
+
+				<br/>
+
+				<label for="seatsAvailable">Seats Available:</label>
+				<input type="text" id="seatsAvailable" placeholder="Enter a number.">
+
+				<br/>
+
+				<label for="date">Date:</label>
+				<input type="text" id="date" name="date" class="tcal" value="" size="21">
+
+				<br/>
+
+				<label for="time">Time:</label>
+				<input type="text" id="time" placeholder="Enter a time in hour : minute, i.e. 3:00 PM">
+
+				<br/>
+
+				<label for="price">Price:</label>
+				<input type="text" id="price" placeholder="Enter a requesting gas price">
+
+				<br/>
+
+				<label for="smoke">Smoking?</label>
+				<input type="radio" name="smoke" id="smoke" value="Yes"><span id="smokeYes">Yes</span>
+				<input type="radio" name="smoke" id="smoke" value="No"><span id="smokeNo">No</span>
+
+				<br/>
+
+				<label for="food">Food?</label>
+				<input type="radio" name="food" id="food" value="Yes"><span id="foodYes">Yes</span>
+				<input type="radio" name="food" id="food" value="No"><span id="foodNo">No</span>
+
+				<br/>
+
+				<label for="drink">Drinks?</label>
+				<input type="radio" name="drink" id="drink" value="Yes"><span id="drinkYes">Yes</span>
+				<input type="radio" name="drink" id="drink" value="No"><span id="drinkNo">No</span>
+
+				<label for="createRides">Create this ride!</label>
+				<input type="button" id="createRides" value="Submit" style="width:14em;">
+			</div>
+		</form>
     </section>
     
 <script type="text/javascript">
 
 $("#createRides").click(function(){   
 	Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
-	
-    var newRide =  Ride;
-    newRide.origin = $("#origin").val().toUpperCase();
-    newRide.destination  = $("#destination").val().toUpperCase();
-	newRide.seatsAvailable = parseInt($("#seatsAvailable").val());
-    newRide.date = $("#date").val();
-    newRide.price = parseFloat($("#price").val());
-    newRide.time = $("#time").val();
-	newRide.smoke = $("#smoke").val();
-    newRide.food = $("#food").val();
-	newRide.drink = $("#drink").val();
-	
-    newRide.insertRide(); 
-    console.log(newRide.destination);
-	
-	window.location.href="search.html";
+	ready = false;
+	<!-- validate(); -->
+
+	function validate() {
+
+		if ($("#origin").val() == "") {
+			alert("A valid origin is needed");
+			$("#origin").focus();
+			return false;
+		}
+
+		re = /^[A-Z][a-zA-Z]+,[ ]?[A-Z]{2}$/;
+		if (!re.test($("#origin").val())) {
+			alert("Incorrect format, please try again.");
+			$("#origin").focus();
+			return false;
+		}
+
+		if ($("#destination").val() == "") {
+			alert("A valid destination is needed");
+			$("destination").focus();
+			return false;
+		}
+
+		if (!re.test($("#destination").val())) {
+			alert("Incorrect format, please try again.");
+			$("destination").focus();
+			return false;
+		}
+
+		if ($("#seatsAvailable").val() == "") {
+			alert("A valid # of seats is needed");
+			$("#seatsAvailable").focus();
+			return false;
+		}
+
+		if ($("#seatsAvailable").val() <= 0) {
+			alert("Seats must be greater than 0");
+			$("#seatsAvailable").focus();
+			return false;
+		}
+
+		re = /^[0-9]+$/;
+		if (!re.test($("#seatsAvailable").val())) {
+			alert("Incorrect format, please try again.");
+			$("#seatsAvailable").focus();
+			return false;
+		}
+
+		if ($("#time").val() == "") {
+			alert("A valid time is needed");
+			$("#time").focus();
+			return false;
+		}
+
+		re = /^((0?[1-9])|(1[0-2])):[0-5]\d [AP]M$/;
+		if (!re.test($("#time").val())) {
+			alert("Please follow the time format");
+			$("#time").focus();
+			return false;
+		}
+
+		if ($("#price").val() == "") {
+			alert("Please provide a price.");
+			$("#price").focus();
+			return false;
+		}
+		if (isNaN($("#price").val())) {
+			alert("Please provide a price that is a number.");
+			$("#price").focus();
+			return false;
+		}
+
+		if ($("#price").val() <= 0) {
+			alert("Price must be greater than 0");
+			$("#price").focus();
+			return false;
+		}
+
+		if(radios()) {
+			ready = true;
+			return true;
+		} else {
+			alert("Please select all options");
+			return false;
+		}
+	}
+
+	function radios() {
+		return ($('input:radio:checked').length = 3);
+	}
+    
+    
+    ready = true;
+    
+    origin = $("#origin").val();
+    destination  = $("#destination").val();
+	seatsAvailable = parseInt($("#seatsAvailable").val());
+    date = $("#date").val();
+    price = parseFloat($("#price").val());
+    time = $("#time").val();
+	smoke = $("#smoke").val();
+    food = $("#food").val();
+	drink = $("#drink").val();
+    
+    var newRide = new Ride(origin, destination, seatsAvailable, date, price, smoke, drink, food);
+    newRide.time = time;
+
+	if (ready) {
+		newRide.insertRide();
+		window.location.href = "search.html";
+	}
 
 });
 
