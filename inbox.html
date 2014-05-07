@@ -12,7 +12,7 @@
     
     <!-- jQuery library and related functions -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script> // include header
+	<script> // include header
     $(function(){
       $("#header").load("header.html"); 
     });
@@ -37,6 +37,43 @@
 	
 	<script>
 		$(document).ready(function(){
+			// check the url parameters if they exist and put them into variables
+			var parameters = getUrlParameter();
+			
+			// check the substring to see if remove option exists
+			if ((parameters.substring(0, 6)) == "remove") {
+				// get the value of the rest of the substring and try to delete
+				// the corresponding record
+				record = parameters.substring(7);
+				
+				var userMsg = Parse.Object.extend("UserMsg");
+				var query = new Parse.Query(userMsg);
+				
+				query.get(record, {
+					success: function(recordset) {
+						// farewell, message.
+						recordset.destroy({
+							success: function(myObject) {
+								// The object was deleted from the Parse Cloud.
+								alert("Message Deleted.");
+								window.location.assign("inbox.html")
+							},
+							error: function(myObject, error) {
+								// The delete failed.
+								alert("Could not delete the Message");
+								window.location.assign("inbox.html")
+							}
+						});
+					},
+					error: function(object, error) {
+						// can't retrieve it, don't do anything
+						alert("Request does not exist");
+						window.location.assign("inbox.html")
+					}
+				});
+			}
+		
+			// display the messages
 			var userMsg = new UserMsg();
 			userMsg.displayMessagesInInbox();
 		});

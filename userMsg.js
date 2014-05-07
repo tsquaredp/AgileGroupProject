@@ -25,20 +25,26 @@ UserMsg.prototype.sendNewMessageRequest = function (){
 		
 		// we're going to need 3 values:
 		// - The object ID of the person sending the request
-		// - The object ID of the person recieving the request
+		// - The object ID of the person receiving the request
 		// - The object ID of the ride
 		msg.set("SenderObjectId",$.cookie("session"));
 		msg.set("RecipentObjectId", driverID);
 		msg.set("RideObjectId",getUrlParameter());
 
-		msg.save(null , {
-		  success: function(msg) {
-			alert("Request Sent.");
-		  },
-		  error: function(msg, error){
-			alert("Failed to send request");
-		  }
-		});
+		// check to see if the sender matchers the receiver to prevent
+		// a user from sending a request to themselves
+		if ($.cookie("session") != driverID) {
+			msg.save(null , {
+			  success: function(msg) {
+				alert("Request Sent.");
+			  },
+			  error: function(msg, error){
+				alert("Failed to send request");
+			  }
+			});
+		} else {
+			alert("You cannot add yourself to your own ride.");
+		}
 	},
 	error: function(object, error) {
 		// something went wrong and we couldn't get the driver ID
@@ -61,6 +67,7 @@ UserMsg.prototype.displayMessagesInInbox = function () {
 			// print the messages using a loop
 			for (var i = 0; i < results.length; i++) {
 				var object = results[i];
+				alert("Message Loaded");
 				
 				// find the User's name that matches the SenderObjectId
 				var user = new Parse.Object.extend("User");
@@ -77,7 +84,7 @@ UserMsg.prototype.displayMessagesInInbox = function () {
 							success: function(rideResult) {
 								// got the Ride object whose name matches the id!
 								// *finally* time to output the message...
-								$('#wrapper').append("<b>"+userResult.get("firstName")+" "+userResult.get("lastName")+"</b> wants to join the ride To: <b>"+rideResult.get("origin")+" - From: "+rideResult.get("destination")+".</b> <a href=inbox.html>Accept</a> <a href=inbox.html>Delete</a> <br>");
+								$('#wrapper').append("<b>"+userResult.get("firstName")+" "+userResult.get("lastName")+"</b> wants to join the ride <b>To: "+rideResult.get("origin")+" - From: "+rideResult.get("destination")+".</b> <a href=inbox.html>Accept</a> <a href=inbox.html?remove="+object.id+">Delete</a> <br>");
 							},
 							error: function (object, error) {
 								alert("There was an error retrieving the ride object");
@@ -95,4 +102,34 @@ UserMsg.prototype.displayMessagesInInbox = function () {
 			alert("Error: " + error.code + " " + error.message);
 		}
 	});
+	
+	/* OLD CODE
+	// let's try this again...
+	// here, we want to get all the messages whose RecipentObjectId = the logged in user.
+	var newMessages = Parse.Object.extend("UserMsg");
+	var query = new Parse.Query(newMessages);
+	query.equalTo("RecipentObjectId", $.cookie("session"));
+	
+	var user = new Parse.Object.extend("User");
+	var query2 = new Parse.Query(user);
+	
+	var ride = Parse.Object.extend("Ride");
+	var query3 = new Parse.Query(ride);
+	
+	var object;
+	
+	query.find().then(function(query) {
+		return query;
+	}).then(function(results) {
+		//for (var i = 0; i < results.length; i++) {
+			var object = results[0];
+			return query2.get(object.get("SenderObjectId"));
+		}).then(function(userResult) {
+			$('#wrapper').append(userResult.get("firstName")+" "+userResult.get("lastName"));
+			return query3.get(object.get("RideObjectId"));
+		}).then(function(rideResult) {
+			$('#wrapper').append(" wants to join the ride <b>To: "+rideResult.get("origin")+" - From: "+rideResult.get("destination")+".</b> <a href=inbox.html>Accept</a> <a href=inbox.html?remove="+object.id+">Delete</a> <br>");
+		});
+	//}
+	*/
 };

@@ -138,8 +138,12 @@ User.prototype.login = function(urlParam){
             $.cookie("role", user.get('role'));
 
             // Do stuff after successful login.
-            //user not active. logout and redirect
-            if(!user.get("isActive")){
+            $.cookie("session", user.id);
+            var fullName =  user.get("firstName")+" "+user.get("lastName");
+            $.cookie("fullName",fullName);
+            alert("success");
+			
+			if(!user.get("isActive")){
                 Parse.User.logOut();
                 document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 GMT"; 
                 document.cookie = "fullName=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
@@ -159,10 +163,6 @@ User.prototype.login = function(urlParam){
     });
 };//end login
 
-User.prototype.logOut = function(urlParam){
-    Parse.User.logOut();
-};
-
 /*
 ** Queries User in Parse for match by id
 ** Calls populateEditUserForm
@@ -178,7 +178,6 @@ User.prototype.findUser = function(id){
         user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"), object.get("age"));
         user.id = object.id; //assign id to User object
         user.isActive = object.get("isActive");
-        user.role = object.get("role");
 
         user.populateEditUserForm();//call method that populates form
         });
@@ -197,18 +196,11 @@ User.prototype.populateEditUserForm = function(){
 	$("#age").val(this.age);
     $("#email").val(this.email);
     $("#isActive").val(this.isActive);
-   // $("#role").val(this.role);
     if(this.isActive == true){
         $("#isActive").prop('checked',true);
     } 
-
-    if (this.role == 'admin'){
-        $("#admin").prop('checked',true);
-    }else if(this.role == 'user'){
-        $("#userButton").prop('checked',true);
-    }
-    
- 
+    //$('input:radio[name=isActive]').prop('checked', true); 
+    //$('input:radio[name=isActive]').prop('unchecked', false); 
 };//end populateEditUserForm
 
 /*
@@ -257,6 +249,48 @@ User.prototype.getUsers = function(){
             
         });        
 };//end getUsers
+
+
+
+
+//TODO - not working yet
+User.prototype.createRole = function() {
+      var roleACL = new Parse.ACL();
+      roleACL.setWriteAccess(Parse.User.current(), true);
+      roleACL.setPublicReadAccess(true);
+      var role = new Parse.Role("Administrator", roleACL);
+      role.getUsers().add(Parse.User.current());
+
+      role.save(null, {
+          success: function(saveObject) {
+              // The object was saved successfully.
+              alert('role creation done');
+              updateRoleACL(saveObject);
+           },
+           error: function(saveObject, error) {
+              // The save failed.
+              window.alert("Failed creating role with error: " + error.code + ":"+ error.message);
+              //assignRoles();
+           }
+      });
+    };
+//TODO - not working yet
+User.prototype.updateRoleACL = function(role) {
+      var roleACL = role.getACL();
+      roleACL.setWriteAccess(Parse.User.current(), false);
+      roleACL.setRoleWriteAccess(role,true); 
+      role.save(null, {
+          success: function(saveObject) {
+              // The object was saved successfully.
+              alert('role acl updated');
+              getUser(); 
+           },
+           error: function(saveObject, error) {
+              // The save failed.
+              window.alert("Failed updating role with error: " + error.code + ":"+ error.message);
+           }        
+      })
+    };
 
 User.prototype.sendEmail = function(id, firstName, lastName, email, username){
 

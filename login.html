@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="en">
 
   <head>
@@ -12,40 +11,57 @@
     
     <!-- jQuery library and related functions -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="jquery.cookie.js"></script>
+    <script> // include header
+    $(function(){
+      $("#header").load("header.html"); 
+    });
+    </script>
+	<script type="text/javascript" src="jquery.cookie.js"></script>
+	<script src="helperFunctions.js"></script>
     
     <!-- parse library -->
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
     
-    <!-- *** TODO: provide a concise description of the purpose of this file here *** -->
+    <!-- encapsulates objects and related functions -->
     <script src="user.js"></script>
-    <script src="helperFunctions.js"></script>
   </head>
   
   <body>
+  
+    <div id="header"></div>
+  
     <div id="wrapper">
-    <h2>Login</h2>
-     <section class="form">
-        <div class="formField">
-            <label for="user">User Name: </label>
-            <input type="text" id="user">
-        </div>
-        <div class="formField">
-            <label for="password">Password: </label>
-            <input type="text" id="password">
-        </div>
-        <div class="formField">
-            <label for="login">Login: </label>
-            <input type="button" id="login" value="Click">
-        </div>
-    </section>
-    
-    <section class="form">
-        <div class="formField">
-            <p><a href="createUser.html">Create New User</a></p>
-        </div>
-    </section>
+	
+		<h2>Login</h2>
+		
+		<section class="form">
+			<form>
+				<div class="formField">
+					<label for="user">User Name: </label>
+					<input type="text" id="user">
+					
+					<br/>
+					
+					<label for="password">Password: </label>
+					<input type="text" id="password">
+					
+					<br/>
+					
+					<label for="login">Login: </label>
+					<input type="button" id="login" value="Click">
+					
+					<br/>
+					
+					<p>
+					<a href="createUser.html">Create New User</a>
+					</p>
+				</div>
+			</form>
+		</section>
+		
     </div>
+	
+  </body>
 <script type="text/javascript">
 $("#login").click(function(){
     //user stuff
@@ -53,11 +69,13 @@ $("#login").click(function(){
     var password = $("#password").val();
     var urlThing = getUrlParameter();
     
-    user = new User(userName, password,'' ,'' ,'','' );
+    user = new User(userName, password,'' ,'' ,'' );
     
     user.login(urlThing);
 });
 
 urlParam = getUrlParameter();
-if (urlParam != ""){ $("body").append("<p>Please log in to view this ride.</p>"); }
+if (urlParam != ""){ $("#wrapper").append("<p>Please log in to view this ride.</p>"); }
 </script>
+</html>
+
