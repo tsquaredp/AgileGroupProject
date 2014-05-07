@@ -13,7 +13,17 @@
     $(function(){
       $("#header").load("header.html"); 
     });
-  </script>
+  
+  
+    // get value of the session cookies
+    var varSession = $.cookie('session');
+
+    //console.log(varSession);
+    if (varSession == null) {
+        //redirect if not logged in
+        window.location.replace("login.html?");
+    }
+    </script>
 </head>
 
 <body>
