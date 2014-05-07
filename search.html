@@ -92,15 +92,12 @@
           
             query.find({
               success: function(results) {
-              alert("Successfully retrieved " + results.length + " rides.");
               var randNum = Math.floor((Math.random() * results.length) + 1);
-              alert("Random number: " + randNum);
              
               for(var i =0; i < results.length; i++) {
                
                var object = results[i];
-                
-               //alert("Test: " + object.get('origin') + " Destination: " + object.get('destination'));
+               
                if(i == randNum) {
                   calcRoute(object.get('origin'), object.get('destination'));
                   alert("Origin: " + object.get('origin') + " Destination: " + object.get('destination'));
@@ -135,13 +132,7 @@ function initialize() {
 	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     
 	directionsDisplay.setMap(map);
-	  
-	var marker = new google.maps.Marker({
-		position: location,
-		map: map,
-		title: 'Hello World!'
-	});
-   
+
 }
 
 //set origin and destination
