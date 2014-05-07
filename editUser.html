@@ -40,7 +40,7 @@
         
     // get value of the session cookies
     var varSession = $.cookie('role');
-    console.log(varSession);
+    //console.log(varSession);
     if (varSession != 'admin') {
         window.location.replace("login.html?"+getId());
     }

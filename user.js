@@ -178,6 +178,7 @@ User.prototype.findUser = function(id){
         user = new User(object.get("username"), object.get("password"), object.get("email"), object.get("firstName"), object.get("lastName"), object.get("age"));
         user.id = object.id; //assign id to User object
         user.isActive = object.get("isActive");
+        user.role = object.get("role");
 
         user.populateEditUserForm();//call method that populates form
         });
@@ -199,8 +200,12 @@ User.prototype.populateEditUserForm = function(){
     if(this.isActive == true){
         $("#isActive").prop('checked',true);
     } 
-    //$('input:radio[name=isActive]').prop('checked', true); 
-    //$('input:radio[name=isActive]').prop('unchecked', false); 
+    if (this.role == 'admin'){
+        $("#admin").prop('checked',true);
+    }else if(this.role == 'user'){
+        $("#userButton").prop('checked',true);
+    }
+    console.log(this.role);
 };//end populateEditUserForm
 
 /*
