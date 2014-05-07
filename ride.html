@@ -94,7 +94,7 @@
 				<li>Model: 'car.model'</li>
 				<li>Year: 'car.year'</li>
 				<li>Color: 'car.color'</li>
-				<li>Available Seats: 'ride.seats'</li>
+				<li id="seatsAvailable">Available Seats: 'ride.seats'</li>
 				<li class="carReqs">Car requirements:</li>
 			</ul>
 		
@@ -147,9 +147,10 @@ function getId(){
 			
             values(id, origin, destination, seatsAvailable, time, date, price, smoke, food, drink);//call external 'values()' function to pass out data           
 		   // The object was retrieved successfully.
-			$(".rideTitle").text("Ride info for: "+origin+" to "+destination);
-			$(".carReqs").append("Smoking? " +smoke+ "<br>Food? " +food+ "<br>Drinks? " +drink);
+			$(".rideTitle").text("Ride info for: "+origin+" to "+destination+" on "+date+ " at "+time+".");
+			$(".carReqs").append("<li>Smoking? " +smoke+ "<li>Food? " +food+ "<li>Drinks? " +drink);
 			
+            $("#seatsAvailable").text("Seats available: " +seatsAvailable);
 			console.log(seatsAvailable);
 			
 			for(var i=1; i<=seatsAvailable; i++){
