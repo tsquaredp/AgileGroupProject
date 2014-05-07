@@ -9,9 +9,16 @@
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
   <script type="text/javascript" src="calendar/tcal.js"></script>
   <script type="text/javascript" src="jquery.cookie.js"></script>
+  <script> // include header
+    $(function(){
+      $("#header").load("header.html"); 
+    });
+    </script>
   <script src="ride.js"></script>
 </head>
 <body>
+    <div id="header"></div>
+    <div  id="wrapper">
     <section class="form">
 		<form class="myForm">
 			<div class="formField" id="createRide">
@@ -68,7 +75,7 @@
 			</div>
 		</form>
     </section>
-    
+    </div>
 <script type="text/javascript">
 
 $("#createRides").click(function(){   
