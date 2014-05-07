@@ -8,49 +8,61 @@
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
   <script type="text/javascript" src="jquery.cookie.js"></script>
   <script type="text/javascript" src="user.js"></script>
+  <script type="text/javascript" src="helperFunctions.js"></script>
+  <script> // include header
+    $(function(){
+      $("#header").load("header.html"); 
+    });
+  </script>
 </head>
 
 <body>
-<h3>Profile Information</h3>
-<section class="form">
-<form name="myForm">
+    <div id="header"></div>
+    <div id="wrapper">
+        <h3>Profile Information</h3>
+        <section class="form">
+        <form name="myForm">
 
-    <div>
-      <img src="placeholder1.jpg">
-    </div>
-    <div class="formfield">
-        <label>Name:</label>
-        <input type="text" id="fName">
-        <input type="text" id="lName">
-    </div>
-    <div class="formfield">
-        <label>Username:</label>
-        <input type="text" id="user">
-    </div>
-    <div class="formfield">
-        <label>Age:</label>
-        <input type="text" id="age">
-    </div>
-    <div class="formfield">
-        <label>Email:</label>
-        <input type="text" id="email">
-    </div>
-</form>
+            <div>
+              <img src="placeholder1.jpg">
+            </div>
+            <div class="formfield">
+                <label>Name:</label>
+                <input type="text" id="fName">
+                <input type="text" id="lName">
+            </div>
+            <div class="formfield">
+                <label>Username:</label>
+                <input type="text" id="user">
+            </div>
+            <div class="formfield">
+                <label>Age:</label>
+                <input type="text" id="age">
+            </div>
+            <div class="formfield">
+                <label>Email:</label>
+                <input type="text" id="email">
+            </div>
+        </form>
 
-    <label for="saveChanges">Save Changes:</label>
-    <input type="button" id="saveChanges" value="Save">
-    <br>
-    <label>Search Rides</label>
-    <input type="button" id="searchRides" value="Ride Search">
+            <label for="saveChanges">Save Changes:</label>
+            <input type="button" id="saveChanges" value="Save">
+            <br>
+            <label>Search Rides</label>
+            <input type="button" id="searchRides" value="Ride Search">
 
-</section>
-
+        </section>
+</div>
 <script>
+//get userID from cookie
+var userId = $.cookie('session');
 
 $("#name").attr("placeholder", "Hello");
 
+//user object, populate form (findUser() does this)
 user = new User();
-user.findUser("puTp3szJJ4");
+user.findUser(userId);
+
 
 $("#searchRides").click(function() {
     window.location.replace("search.html");
