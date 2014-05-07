@@ -54,6 +54,13 @@ body {
     width: 79.5%;
     height: 500px;
 }
+.mapSearch {
+    margin-left:auto;
+    margin-right:auto;
+    border: solid;
+    width: 79.5%;
+    height: 500px;
+}
 
 #map-canvas { 
     height: 100%;
