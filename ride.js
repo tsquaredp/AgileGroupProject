@@ -91,3 +91,41 @@ Ride.prototype.displayMatchingRides = function(query){
         });
     }
 };
+
+function searchRides() {
+	var origin = $("#origin").val();
+	var destination  = $("#destination").val();
+	var date = $("#date").val();
+
+	var searchRides = $(function(){
+		Parse.initialize("QcwXhisuq1pu4BqEo7PJ2mhqNb60zxTirYIhuUYq", "4k6woAZq5BaTmLFMNIv7dL4X2SshOkW5Hy4sRnmL");
+		
+		var Ride = Parse.Object.extend("Ride");//create Ride class, subclass of Parse.Object
+		var query = new Parse.Query(Ride);//create instance of Ride Class, called query
+		
+		if(origin != ''){query.equalTo("origin",origin);}
+		if(destination != ''){query.equalTo("destination",destination);}
+		if(date != ''){query.equalTo("date", date);}
+
+		query.find({
+		  success: function(results) {
+			var rideArray = new Array();
+			// The object was retrieved successfully.
+			for (var i = 0; i < results.length; i++) { 
+			  var object = results[i];
+			 // alert(object.id + ' - ' + object.get('destination'));
+			  rideArray.push(object.id);
+			}
+		  window.location = "rideSearchResults.html?"+rideArray;
+		  },
+		  error: function(object, error) {
+			// The object was not retrieved successfully.
+			// error is a Parse.Error with an error code and description.
+			alert("error");
+		  }
+		});
+		
+		
+	});
+			
+}
